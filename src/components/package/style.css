@@ -908,6 +908,15 @@ body {
 
 /* Styles for medium screens */
 @media (max-width: 425px) {
+  .cricle-background_banner {
+    background: rgb(180, 209, 230);
+    padding: 10px;
+    border-radius: 10px;
+    width: 40%;
+    top: 55%;
+    position: absolute;
+    left: -9%;
+  }
   .disabled-none {
     display: block !important;
   }
