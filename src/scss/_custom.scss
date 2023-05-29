@@ -1,0 +1,69 @@
+// Here you can add other styles
+.border-12px {
+  border: 1px solid #f3f1f1;
+  border-radius: 5px;
+  padding: 3px;
+}
+.border-bottom-12px {
+  border-bottom: 1px solid #3a3939;
+  padding: 5px;
+}
+
+.margin-left-2px {
+  margin-left: 2px;
+}
+.margin-left-12px {
+  margin-left: 12px;
+}
+.margin-top-bottom-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.margin-right-2px {
+  margin-right: 2px;
+}
+.margin-right-12px {
+  margin-right: 12px;
+}
+.text-center {
+  text-align: center;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.eye-custom:hover {
+  border: 1px solid #b9afaf;
+}
+.font-weight-600 {
+  font-weight: 600;
+}
+
+.disable {
+  display: none;
+}
+.none_disable {
+  display: flex;
+}
+
+.border-radius {
+  border-radius: 5px;
+}
+.custom-btn {
+  border-radius: 12px;
+  // height: 40px;
+  margin: auto;
+  margin-left: 20px;
+  font-weight: 500;
+  padding: 6px 16px !important;
+  background-color: #1573fe;
+  border: none;
+}
+.pt-100 {
+  padding-top: 100px;
+}
+.pb-70 {
+  padding-bottom: 70px;
+}
+.pb-100 {
+  padding-bottom: 100px;
+}

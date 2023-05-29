@@ -1,0 +1,10 @@
+.input-group-search {
+  border: 1px solid #837b7b;
+  padding: 7px;
+  border-radius: 5px;
+  background: #fff;
+}
+#search_criteria {
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
