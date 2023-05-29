@@ -901,6 +901,9 @@ body {
     width: 100%;
     border-radius: 10px;
   }
+  .disabled-none {
+    display: block !important;
+  }
 }
 
 /* Styles for medium screens */
