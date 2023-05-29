@@ -35,7 +35,7 @@ const PackageComponent = (props) => {
           <div className="d-table-cell">
             <div className="container" style={{ marginTop: "-10%" }}>
               <div className="row">
-                <div className="col col-md-8 col-sm-12">
+                <div className="col-8 col-md-8 col-sm-8">
                   <div className="banner-text">
                     <h6>
                       Tra cứu thông tin
@@ -59,7 +59,7 @@ const PackageComponent = (props) => {
                   </div>
                 </div>
                 <div
-                  className="col col-md-4 col-sm-12"
+                  className="col-4 col-md-4 col-sm-4"
                   style={{ position: "relative" }}
                 >
                   <img
@@ -96,23 +96,23 @@ const PackageComponent = (props) => {
               <div className="row justify-content-center" id="tra-cuu">
                 <div className="banner-card">
                   <div className="row">
-                    <div className="col col-md-4 col-sm-12 banner-card-item">
+                    <div className="col col-md-4  banner-card-item">
                       <h3>150+</h3>
                       <span>
                         Gói cước đa dạng phù hợp nhiều mô hình doanh nghiệp và
                         hộ gia đình
                       </span>
                     </div>
-                    <span className="layout_cricle-1 col-sm-1"></span>
-                    <div className="col col-md-4 col-sm-10 banner-card-item">
+                    <span className="layout_cricle-1"></span>
+                    <div className="col col-md-4  banner-card-item">
                       <h3>200+</h3>
                       <span>
                         Gói cước đa dạng phù hợp nhiều mô hình doanh nghiệp và
                         hộ gia đình
                       </span>
                     </div>
-                    <span className="layout_cricle-2 col-sm-1"></span>
-                    <div className="col col-md-4 col-sm-10 banner-card-item">
+                    <span className="layout_cricle-2 "></span>
+                    <div className="col col-md-4  banner-card-item">
                       <h3>100+</h3>
                       <span>
                         Gói cước đa dạng phù hợp nhiều mô hình doanh nghiệp và

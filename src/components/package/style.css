@@ -75,7 +75,7 @@ body {
   padding: 10px;
   border-radius: 10px;
   width: 60%;
-  top: 55%;
+  top: 60%;
   position: absolute;
   left: -23%;
 }
@@ -83,7 +83,7 @@ body {
   font-size: 1.2rem;
 }
 .customer_star_banner {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 
 .cricle-background {
@@ -695,8 +695,7 @@ body {
   .main-info .main-info-content {
     width: 460px;
     height: 124px;
-    font-family: "Lexend Deca";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 20px;
     line-height: 140.5%;
@@ -800,10 +799,31 @@ body {
   .customer_star_banner {
     font-size: 0.7rem;
   }
+  .cricle-background_banner {
+    background: rgb(180, 209, 230);
+    padding: 10px;
+    border-radius: 10px;
+    width: 60% !important;
+    top: 40%;
+    position: absolute;
+    left: 0%;
+  }
 }
 
 /* Styles for small screens */
 @media (max-width: 768px) {
+  .input-lookup {
+    font-size: 70%;
+  }
+  .cricle-background_banner {
+    background: rgb(180, 209, 230);
+    padding: 10px;
+    border-radius: 10px;
+    width: 75%;
+    top: 35%;
+    position: absolute;
+    left: 0%;
+  }
   .banner-style-three .banner-text h6 {
     font-size: 18px;
   }
@@ -817,7 +837,7 @@ body {
     box-sizing: border-box;
     position: absolute;
     max-width: 660px;
-    height: 185px;
+    height: 240px;
     margin-top: 10%;
     /* left: 22%; */
     /* top: -1%; */
