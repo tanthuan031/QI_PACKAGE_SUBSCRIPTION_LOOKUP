@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 import {
+  CAvatar,
   CButton,
   CDropdown,
   CDropdownDivider,
@@ -14,7 +15,7 @@ import ImageBackgroundSlider from "../../assets/img/no-bgr_logo.png";
 import ImageBackgroundCustomer from "../../assets/img/tag.png";
 import ImageBackgroundCompany from "../../assets/img/company-logo/1.png";
 import ImageBackgroundLogo from "../../assets/img/logo_qi.png";
-import { FaFacebook, FaFacebookSquare } from "react-icons/fa";
+import { FaFacebook, FaFacebookSquare, FaStar } from "react-icons/fa";
 const PackageComponent = (props) => {
   const [selectAll, setSelectAll] = useState(false);
 
@@ -65,13 +66,30 @@ const PackageComponent = (props) => {
                     src={ImageBackgroundSlider}
                     style={{ maxWidth: "100%" }}
                   />
-                  <div className="cricle-background" id="find-section">
-                    <img
+                  <div className="cricle-background_banner" id="find-section">
+                    {/* <img
                       src={ImageBackgroundCustomer}
                       style={{ maxWidth: "100%" }}
+                    /> */}
+                    <CAvatar
+                      src={
+                        "https://coreui.io/react/docs/static/1-34eedf58c0876517e8587997f9625944.jpg"
+                      }
                     />
-                    <h4 className="customer_background">1200+ Khách hàng</h4>
-                    <h6 className="customer_star">1200+ Khách hàng</h6>
+                    <CAvatar
+                      src={
+                        "https://coreui.io/react/docs/static/2-0c06e43dc16bee6cdfed92f9be277b5d.jpg"
+                      }
+                    />
+                    <CAvatar
+                      src={
+                        "https://coreui.io/react/docs/static/3-07e357f51e1b86d9e741409ac9e2eba5.jpg"
+                      }
+                    />
+
+                    <h5 className="customer_star_banner pt-2">
+                      <FaStar className="text-warning" /> 1200+ Khách hàng
+                    </h5>
                   </div>
                 </div>
               </div>
@@ -115,7 +133,7 @@ const PackageComponent = (props) => {
             <div className="row">
               <div className="col-lg-12" style={{ position: "relative" }}>
                 <CInputGroup className="mb-3 input-search">
-                  <CDropdown variant="input-group">
+                  {/* <CDropdown variant="input-group">
                     <CDropdownToggle
                       color="secondary"
                       variant="outline"
@@ -129,8 +147,12 @@ const PackageComponent = (props) => {
                       <CDropdownItem href="#">Đà Nẵng</CDropdownItem>
                       <CDropdownItem href="#">Hà Nội</CDropdownItem>
                     </CDropdownMenu>
-                  </CDropdown>
-                  <CFormInput aria-label="Text input with dropdown button" />
+                  </CDropdown> */}
+                  <CFormInput
+                    aria-label="Text input with dropdown button"
+                    placeholder="Tìm kiếm: Địa chỉ/Mã khách hàng/Số điện thoại..."
+                    className="input-lookup"
+                  />
                 </CInputGroup>
                 <button
                   className="btn btn-outline-secondary btn-search"

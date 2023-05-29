@@ -1,3 +1,12 @@
+body {
+  font-family: Segoe UI, Roboto, sans-serif !important;
+  font-size: 16px;
+  line-height: 25px;
+  position: relative;
+}
+.disabled-none {
+  display: none;
+}
 .d-table {
   width: 100%;
   height: 100%;
@@ -61,7 +70,20 @@
   background: #001935;
 }
 
-.cricle-background {
+.cricle-background_banner {
+  background: rgb(180, 209, 230);
+  padding: 10px;
+  border-radius: 10px;
+  width: 60%;
+  top: 55%;
+  position: absolute;
+  left: -23%;
+}
+.customer_background_banner {
+  font-size: 1.2rem;
+}
+.customer_star_banner {
+  font-size: 0.9rem;
 }
 
 .cricle-background {
@@ -127,7 +149,9 @@
 .find-section .input-search {
   height: 60px;
 }
-
+.input-lookup {
+  font-size: 100%;
+}
 .find-section .btn-search {
   position: absolute;
   right: 2%;
@@ -761,6 +785,21 @@
     width: 100%;
     border-radius: 10px;
   }
+  .cricle-background_banner {
+    background: rgb(180, 209, 230);
+    padding: 10px;
+    border-radius: 10px;
+    width: 80% !important;
+    top: 65%;
+    position: absolute;
+    left: -30%;
+  }
+  .customer_background_banner {
+    font-size: 1rem;
+  }
+  .customer_star_banner {
+    font-size: 0.7rem;
+  }
 }
 
 /* Styles for small screens */
@@ -818,7 +857,7 @@
     top: 44%;
     left: -8%;
   }
-  .find-form . input-search btn {
+  .find-form .input-search btn {
     width: 20% !important;
   }
   .job-card-two .company-logo {
@@ -866,10 +905,16 @@
 
 /* Styles for medium screens */
 @media (max-width: 425px) {
+  .disabled-none {
+    display: block !important;
+  }
+  .input-lookup {
+    font-size: 50%;
+  }
   .banner-card {
     box-sizing: border-box;
     position: absolute;
-    max-width: 450px !important;
+    max-width: 330px !important;
     height: 185px;
     margin-top: 10%;
     /* left: 22%; */
@@ -884,6 +929,21 @@
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     border-radius: 16px;
+  }
+  .cricle-background_banner {
+    background: rgb(190 219 241);
+    padding: 10px;
+    border-radius: 10px;
+    width: 70% !important;
+    top: 25%;
+    position: absolute;
+    left: -8%;
+  }
+  .customer_background_banner {
+    font-size: 0.9rem;
+  }
+  .customer_star_banner {
+    font-size: 50%;
   }
   .cricle-background {
     width: 270px;
@@ -970,6 +1030,27 @@
   }
   .footer-area .footer-widget.pl-60 {
     padding-left: 0px !important;
+  }
+  .main-info .main-info-title {
+    width: 210px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 50px;
+    color: #000000;
+  }
+  .main-info .main-info-content {
+    width: 210px;
+    height: 155px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140.5%;
+    color: #000000;
+  }
+  .banner-style-three {
+    height: 810px !important;
+  }
+  .d-table-cell .container {
+    margin-top: -90% !important;
   }
 }
 
