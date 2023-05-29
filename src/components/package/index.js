@@ -122,8 +122,7 @@ const PackageComponent = (props) => {
           </div>
         </div>
       </div>
-
-      <div className="find-section pb-100" id="tra-cuu">
+      <div className="find-section pb-100">
         <div className="container">
           <form className="find-form">
             <div className="row">
