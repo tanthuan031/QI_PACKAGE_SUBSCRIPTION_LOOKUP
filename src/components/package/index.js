@@ -67,10 +67,6 @@ const PackageComponent = (props) => {
                     style={{ maxWidth: "100%" }}
                   />
                   <div className="cricle-background_banner" id="find-section">
-                    {/* <img
-                      src={ImageBackgroundCustomer}
-                      style={{ maxWidth: "100%" }}
-                    /> */}
                     <CAvatar
                       src={
                         "https://coreui.io/react/docs/static/1-34eedf58c0876517e8587997f9625944.jpg"
@@ -93,7 +89,7 @@ const PackageComponent = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="row justify-content-center" id="tra-cuu">
+              <div className="row justify-content-center">
                 <div className="banner-card">
                   <div className="row">
                     <div className="col col-md-4  banner-card-item">
@@ -127,7 +123,7 @@ const PackageComponent = (props) => {
         </div>
       </div>
 
-      <div className="find-section pb-100">
+      <div className="find-section pb-100" id="tra-cuu">
         <div className="container">
           <form className="find-form">
             <div className="row">
