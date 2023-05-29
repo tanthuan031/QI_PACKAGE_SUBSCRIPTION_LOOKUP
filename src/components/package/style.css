@@ -333,7 +333,7 @@ body {
   width: 380px;
 
   font-weight: 700;
-  font-size: 40px;
+  font-size: 28px;
   line-height: 50px;
 
   color: #000000;
@@ -342,7 +342,7 @@ body {
   width: 480px;
   height: 124px;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 140.5%;
   /* or 31px */
 
@@ -920,6 +920,7 @@ body {
     position: relative;
     width: 100%;
     border-radius: 10px;
+    margin-top: 10px !important;
   }
   .disabled-none {
     display: block !important;
@@ -928,15 +929,6 @@ body {
 
 /* Styles for medium screens */
 @media (max-width: 425px) {
-  .cricle-background_banner {
-    background: rgb(180, 209, 230);
-    padding: 10px;
-    border-radius: 10px;
-    width: 40%;
-    top: 55%;
-    position: absolute;
-    left: -9%;
-  }
   .disabled-none {
     display: block !important;
   }
@@ -966,7 +958,7 @@ body {
     background: rgb(190 219 241);
     padding: 10px;
     border-radius: 10px;
-    width: 70% !important;
+    width: 100% !important;
     top: 25%;
     position: absolute;
     left: -8%;
@@ -1064,17 +1056,17 @@ body {
     padding-left: 0px !important;
   }
   .main-info .main-info-title {
-    width: 210px;
+    width: 100%;
     font-weight: 700;
     font-size: 20px;
     line-height: 50px;
     color: #000000;
   }
   .main-info .main-info-content {
-    width: 210px;
+    width: 337px;
     height: 155px;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 140.5%;
     color: #000000;
   }
@@ -1083,6 +1075,14 @@ body {
   }
   .d-table-cell .container {
     margin-top: -90% !important;
+  }
+  .main-info-support {
+    border: 1px solid #e3e3e3;
+    height: 50px;
+    position: relative;
+    width: 100%;
+    margin-top: 40px !important;
+    border-radius: 10px;
   }
 }
 
