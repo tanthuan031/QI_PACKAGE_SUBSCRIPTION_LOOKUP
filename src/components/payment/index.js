@@ -373,7 +373,7 @@ const PaymentComponent = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <footer className="footer-area pt-100 pb-70 mt-5" id="footer">
+      <footer className="footer-area pt-100 pb-70 mt-5">
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-sm-6">

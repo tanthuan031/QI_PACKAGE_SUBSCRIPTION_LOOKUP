@@ -152,6 +152,10 @@ const PackageComponent = (props) => {
         totalPrice: totalAmount,
       })
     );
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Tuỳ chọn cho hiệu ứng di chuyển mượt hơn
+    });
   };
   return (
     <div className="container-fluid">
