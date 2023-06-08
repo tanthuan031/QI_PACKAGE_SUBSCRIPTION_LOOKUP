@@ -11,9 +11,9 @@ const PackagePage = () => {
       {
         id: 1,
         customer_code: "001", //Ma dinh danh
-        customer_phone: "0399102726", //Số điện thoại
+        customer_phone: "0903906072", //Số điện thoại
         customer_identifier_code: "24313120", //Mã định danh
-        customer_name: "Ho Tan Thuan", //Tên KH
+        customer_name: "VŨ THỊ THU", //Tên KH
         service_code: "0001", //Mã dịch vụ
         package_code: ["01"],
         status: 0,
@@ -23,9 +23,9 @@ const PackagePage = () => {
         customer_code: "002", //Ma dinh danh
         customer_phone: "0399102726", //Số điện thoại
         customer_identifier_code: "24313121", //Mã định danh
-        customer_name: "Ho Tan Thuan", //Tên KH
+        customer_name: "TRẦN ANH TUẤN", //Tên KH
         service_code: "0001", //Mã dịch vụ
-        package_code: ["01", "02", "03"],
+        package_code: ["01", "02", "04"],
         status: 0,
       },
       {
@@ -33,9 +33,9 @@ const PackagePage = () => {
         customer_code: "003", //Ma dinh danh
         customer_phone: "0399102726", //Số điện thoại
         customer_identifier_code: "24313122", //Mã định danh
-        customer_name: "Ho Tan Thuan", //Tên KH
+        customer_name: "NGUYỄN TẤN KHOA", //Tên KH
         service_code: "0001", //Mã dịch vụ
-        package_code: ["01", "02", "03"],
+        package_code: ["01", "03"],
         status: 0,
       },
       {
@@ -43,9 +43,19 @@ const PackagePage = () => {
         customer_code: "004", //Ma dinh danh
         customer_phone: "0399102726", //Số điện thoại
         customer_identifier_code: "24313123", //Mã định danh
-        customer_name: "Ho Tan Thuan", //Tên KH
+        customer_name: "TRẦN THỊ THU THỦY", //Tên KH
         service_code: "0001", //Mã dịch vụ
-        package_code: ["01", "02", "03"],
+        package_code: ["01", "02", "05", "04"],
+        status: 0,
+      },
+      {
+        id: 5,
+        customer_code: "005", //Ma dinh danh
+        customer_phone: "0399102726", //Số điện thoại
+        customer_identifier_code: "24313123", //Mã định danh
+        customer_name: "TRẦN THỊ HỒNG", //Tên KH
+        service_code: "0001", //Mã dịch vụ
+        package_code: ["02", "05", "04"],
         status: 0,
       },
     ];

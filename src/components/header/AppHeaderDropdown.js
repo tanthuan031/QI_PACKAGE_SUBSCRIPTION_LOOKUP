@@ -48,6 +48,7 @@ const AppHeaderDropdown = () => {
         <CDropdownItem href="#">Trang chủ</CDropdownItem>
         <CDropdownItem href="#footer">Về chúng tôi</CDropdownItem>
         <CDropdownItem href="#contact">Liên hệ</CDropdownItem>
+
         <CDropdownItem href="#">
           <CNavItem>
             <CNavLink
