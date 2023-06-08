@@ -359,8 +359,7 @@ const PackageComponent = (props) => {
                                 htmlFor={`flexRadioDefault${index}`}
                               >
                                 <h5>
-                                  #{item.package_code} - [***] -
-                                  {item.package_name}
+                                  #{item.package_code} - {item.package_name}
                                 </h5>
                               </label>
                             </div>
