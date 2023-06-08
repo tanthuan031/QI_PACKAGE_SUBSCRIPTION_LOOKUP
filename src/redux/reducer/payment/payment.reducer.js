@@ -1,25 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 export const paymentReducer = createSlice({
-  name: 'payment',
+  name: "payment",
   initialState: {
     key: 0,
-    isCreatePaymentStatement: false,
+    isCreatePayment: false,
     isCreatePaymentReceipt: false,
+    dataPackagePayment: undefined,
   },
   reducers: {
     setKey: (state, action) => {
-      state.key = action.payload
+      state.key = action.payload;
     },
-    setIsCreatePaymentStatement: (state, action) => {
-      state.isCreatePaymentStatement = action.payload
+    setIsCreatePayment: (state, action) => {
+      state.isCreatePayment = action.payload;
     },
-    setIsCreatePaymentReceipt: (state, action) => {
-      state.isCreatePaymentReceipt = action.payload
+    setDataPayment: (state, action) => {
+      state.dataPackagePayment = action.payload;
     },
   },
-})
+});
 
-export const { setIsCreatePaymentStatement, setIsCreatePaymentReceipt } = paymentReducer.actions
+export const { setIsCreatePayment, setDataPayment } = paymentReducer.actions;
 
-export default paymentReducer.reducer
+export default paymentReducer.reducer;

@@ -13,10 +13,20 @@ import {
 } from "@coreui/react";
 import ImageBackgroundSlider from "../../assets/img/no-bgr_logo.png";
 import ImageBackgroundCustomer from "../../assets/img/tag.png";
-import ImageBackgroundCompany from "../../assets/img/company-logo/1.png";
+import ImageBackgroundCompany from "../../assets/img/company-logo/5.png";
 import ImageBackgroundLogo from "../../assets/img/logo_qi.png";
 import { FaFacebook, FaFacebookSquare, FaStar } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import {
+  setDataPayment,
+  setIsCreatePayment,
+} from "src/redux/reducer/payment/payment.reducer";
 const PackageComponent = (props) => {
+  const dispatch = useDispatch();
+  const VND = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
   const [selectAll, setSelectAll] = useState(false);
 
   const handleSelectAll = (event) => {
@@ -27,6 +37,113 @@ const PackageComponent = (props) => {
       checkbox.checked = event.target.checked;
     });
     setSelectAll(event.target.checked);
+  };
+
+  const listData =
+    localStorage.getItem("myData") &&
+    JSON.parse(localStorage.getItem("myData"));
+  const listPackage =
+    localStorage.getItem("myPackage") &&
+    JSON.parse(localStorage.getItem("myPackage"));
+
+  const [dataSearch, setDataSearch] = useState();
+  const [dataLookupPackage, setDataLookupPackage] = useState(undefined);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const filteredData = listData.filter((item) => {
+      return (
+        item.customer_identifier_code === dataSearch ||
+        item.customer_phone === dataSearch ||
+        item.customer_code === dataSearch
+      );
+    });
+
+    if (filteredData.length > 0) {
+      const customerPackages = listPackage.filter((itm) => {
+        return filteredData[0].package_code.includes(itm.package_code);
+      });
+      setDataLookupPackage({
+        package: customerPackages,
+        customer: filteredData,
+      });
+    } else {
+      setDataLookupPackage(undefined);
+    }
+  };
+
+  // Check
+
+  const [isCheckedAll, setIsCheckedAll] = useState(false);
+  const [checkedItems, setCheckedItems] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [isIndeterminate, setIsIndeterminate] = useState(false);
+  const handleCheckItem = (event, item) => {
+    const isChecked = event.target.checked;
+
+    // Cập nhật trạng thái checkbox của item được chọn/bỏ chọn
+    setCheckedItems((prevCheckedItems) => {
+      if (isChecked) {
+        console.log(checkedItems.length + 1);
+        console.log(dataLookupPackage.package.length);
+        if (checkedItems.length + 1 == dataLookupPackage.package.length) {
+          setIsCheckedAll(true);
+        } else {
+          setIsCheckedAll(false);
+        }
+        return [...prevCheckedItems, item];
+      } else {
+        console.log(checkedItems.length, dataLookupPackage.package.length);
+        if (checkedItems.length + 1 !== dataLookupPackage.package.length) {
+          setIsCheckedAll(false);
+        }
+        return prevCheckedItems.filter(
+          (checkedItem) => checkedItem.id !== item.id
+        );
+      }
+    });
+
+    // Tính toán tổng số tiền
+    const amount = isChecked ? item.package_price : -item.package_price;
+    setTotalAmount((prevTotalAmount) => prevTotalAmount + amount);
+  };
+  const handleCheckAll = (event) => {
+    const isChecked = event.target.checked;
+    setIsCheckedAll(isChecked);
+
+    // Cập nhật trạng thái checkbox của tất cả các item
+    if (isChecked) {
+      setCheckedItems(dataLookupPackage.package);
+    } else {
+      setCheckedItems([]);
+    }
+
+    // Tính toán tổng số tiền
+    const totalAmount = isChecked
+      ? calculateTotalAmount(dataLookupPackage.package)
+      : 0;
+    setTotalAmount(totalAmount);
+
+    // Cập nhật trạng thái của checkbox "Chọn tất cả"
+    setIsIndeterminate(false);
+  };
+  const calculateTotalAmount = (items) => {
+    return items.reduce((total, item) => total + item.package_price, 0);
+  };
+
+  // Checkout
+
+  const handleCheckout = () => {
+    // console.log("Checkout", checkedItems);
+    dispatch(setIsCreatePayment(true));
+    dispatch(
+      setDataPayment({
+        packages: checkedItems,
+        customers: dataLookupPackage.customer,
+        totalPrice: totalAmount,
+      })
+    );
   };
   return (
     <div className="container-fluid">
@@ -145,8 +262,9 @@ const PackageComponent = (props) => {
                   </CDropdown> */}
                   <CFormInput
                     aria-label="Text input with dropdown button"
-                    placeholder="Tìm kiếm: Địa chỉ/Mã khách hàng/Số điện thoại..."
+                    placeholder="Tìm kiếm theo: Mã định danh/Số điện thoại/CCCD-CMND"
                     className="input-lookup"
+                    onChange={(event) => setDataSearch(event.target.value)}
                   />
                 </CInputGroup>
                 <button
@@ -154,6 +272,7 @@ const PackageComponent = (props) => {
                   type="submit"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  onClick={handleSearch}
                 >
                   Tra cứu
                 </button>
@@ -164,237 +283,166 @@ const PackageComponent = (props) => {
       </div>
 
       <section className="job-style-two pb-70">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
+        {dataLookupPackage !== undefined ? (
+          <div
+            className="container"
+            style={{
+              background: "#fff",
+              borderRadius: "27px",
+              padding: "38px",
+            }}
+          >
+            <div className="row ">
+              <h5 className="text-center">Danh sách gói cước</h5>
+              <div className=" col-md-12 col-sm-12 mt-2">
+                <span className="" style={{ fontWeight: "500" }}>
+                  <i className="bx bx-user"></i>
+                  Tên khách hàng :
+                </span>
+                <span>{dataLookupPackage.customer[0].customer_name}</span>
+              </div>
+              <div className=" col-md-12 col-sm-12 mt-2">
+                <span style={{ fontWeight: "500" }}>
+                  <i className="bx bx-phone"></i>
+                  Số điện thoại :
+                </span>
+                <span>{dataLookupPackage.customer[0].customer_phone}</span>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="form-check d-flex justify-content-end mb-2">
+                  <input
+                    className="form-check-input"
+                    style={{ marginRight: "2px" }}
+                    type="checkbox"
+                    value=""
+                    name=""
+                    id="flexCheckDefaultSelectAll"
+                    checked={isCheckedAll}
+                    onChange={handleCheckAll}
+                  />
+                  <label
+                    className="form-check-label "
+                    htmlFor="flexCheckDefaultSelectAll"
+                    style={{ fontWeight: "500" }}
+                  >
+                    Chọn tất cả
+                  </label>
+                </div>
+              </div>
+
+              {dataLookupPackage.package.map((item, index) => {
+                return (
+                  <div className="col-lg-12" key={index}>
+                    <div className="job-card-two">
+                      <div className="row align-items-center">
+                        <div className="col-md-1">
+                          <div className="company-logo">
+                            <a href="job-details.html">
+                              <img src={ImageBackgroundCompany} alt="logo" />
+                            </a>
+                          </div>
+                        </div>
+                        <div className="col-md-10">
+                          <div className="job-info">
+                            <div className="form-check">
+                              <input
+                                className="form-check-input "
+                                type="radio"
+                                name={`flexRadioDefault${index}`}
+                                id={`flexRadioDefault${index}`}
+                                defaultChecked
+                              />
+                              <label
+                                className="form-check-label "
+                                htmlFor={`flexRadioDefault${index}`}
+                              >
+                                <h5>
+                                  #{item.package_code} - [***] -
+                                  {item.package_name}
+                                </h5>
+                              </label>
+                            </div>
+
+                            {/* <ul>
+                              <li>
+                                <i className="bx bx-user"></i>
+                                Tên khách hàng :
+                              </li>
+                              <li>
+                                {dataLookupPackage.customer[0].customer_name}
+                              </li>
+                            </ul> */}
+                            {dataLookupPackage.customer[0].status === 0 ? (
+                              <span className="btn btn-outline-warning">
+                                Chưa thanh toán
+                              </span>
+                            ) : (
+                              <span className="btn btn-outline-warning">
+                                Quá hạn thanh toán
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="col-md-1">
+                          <div className="form-check text-center">
+                            <input
+                              className="form-check-input item-checkbox-payment"
+                              style={{ margin: "0 50%" }}
+                              type="checkbox"
+                              value=""
+                              id="flexCheckDefault"
+                              checked={checkedItems.includes(item)}
+                              onChange={(event) => handleCheckItem(event, item)}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div
+                          className="d-flex justify-content-end"
+                          style={{ position: "relative" }}
+                        >
+                          <div className="d-flex job-card-two-currency">
+                            <h6>Số tiền :</h6>
+                            <h6>{VND.format(item.package_price)}</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="col-lg-12 mr-3">
+              <div className="form-check text-end">
+                <h6>Tổng cộng</h6>
+                <h4>{VND.format(totalAmount)}</h4>
+              </div>
+            </div>
+            <div className="col-lg-12 mr-3 mt-3">
               <div className="form-check d-flex justify-content-end">
-                <input
-                  className="form-check-input"
-                  style={{ marginRight: "2px" }}
-                  type="checkbox"
-                  value=""
-                  name=""
-                  id="flexCheckDefaultSelectAll"
-                  checked={selectAll}
-                  onChange={handleSelectAll}
-                />
-                <label
-                  className="form-check-label "
-                  htmlFor="flexCheckDefaultSelectAll"
+                {/* <button className="btn btn-secondary mr-3 ">Hủy</button> */}
+                <button
+                  className={`btn ${
+                    checkedItems.length > 0 ? "btn-primary" : "btn-secondary"
+                  } `}
+                  onClick={handleCheckout}
+                  disabled={checkedItems.length > 0 ? false : true}
                 >
-                  Chọn tất cả
-                </label>
-              </div>
-            </div>
-            <div className="col-lg-12">
-              <div className="job-card-two">
-                <div className="row align-items-center">
-                  <div className="col-md-1">
-                    <div className="company-logo">
-                      <a href="job-details.html">
-                        <img src={ImageBackgroundCompany} alt="logo" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-md-10">
-                    <div className="job-info">
-                      <div className="form-check">
-                        <input
-                          className="form-check-input "
-                          type="radio"
-                          name="flexRadioDefault1"
-                          id="flexRadioDefault1"
-                          defaultChecked
-                        />
-                        <label
-                          className="form-check-label "
-                          htmlFor="flexRadioDefault1"
-                        >
-                          <h5>#76666 - [PEG] - Lắp mới wifi tòa nhà</h5>
-                        </label>
-                      </div>
-
-                      <ul>
-                        <li>
-                          <i className="bx bx-user"></i>
-                          Tên khách hàng :
-                        </li>
-                        <li>Bùi Văn Giang</li>
-                      </ul>
-                      <span className="btn btn-outline-success">
-                        Đã thanh toán
-                      </span>
-                    </div>
-                  </div>
-                  <div className="col-md-1">
-                    <div className="form-check text-center">
-                      <input
-                        className="form-check-input item-checkbox-payment"
-                        style={{ margin: "0 50%" }}
-                        type="checkbox"
-                        value=""
-                        id="flexCheckDefault"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div
-                    className="d-flex justify-content-end"
-                    style={{ position: "relative" }}
-                  >
-                    <div className="d-flex job-card-two-currency">
-                      <h6>Số tiền :</h6>
-                      <h6>275.000đ</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-12">
-              <div className="job-card-two">
-                <div className="row align-items-center">
-                  <div className="col-md-1">
-                    <div className="company-logo">
-                      <a href="job-details.html">
-                        <img src={ImageBackgroundCompany} alt="logo" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-md-10">
-                    <div className="job-info">
-                      <div className="form-check">
-                        <input
-                          className="form-check-input "
-                          type="radio"
-                          name="flexRadioDefault2"
-                          id="flexRadioDefault12"
-                          defaultChecked
-                        />
-                        <label
-                          className="form-check-label "
-                          htmlFor="flexRadioDefault1"
-                        >
-                          <h5>#76666 - [PEG] - Lắp mới wifi tòa nhà</h5>
-                        </label>
-                      </div>
-
-                      <ul>
-                        <li>
-                          <i className="bx bx-user"></i>
-                          Tên khách hàng :
-                        </li>
-                        <li>Bùi Văn Giang</li>
-                      </ul>
-                      <span className="btn btn-outline-warning">
-                        Đến kỳ thanh toán
-                      </span>
-                    </div>
-                  </div>
-                  <div className="col-md-1">
-                    <div className="form-check text-center">
-                      <input
-                        className="form-check-input item-checkbox-payment "
-                        style={{ margin: "0 50%" }}
-                        type="checkbox"
-                        value=""
-                        id="flexCheckDefault"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div
-                    className="d-flex justify-content-end"
-                    style={{ position: "relative" }}
-                  >
-                    <div className="d-flex job-card-two-currency">
-                      <h6>Số tiền :</h6>
-                      <h6>275.000đ</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>{" "}
-            <div className="col-lg-12">
-              <div className="job-card-two">
-                <div className="row align-items-center">
-                  <div className="col-md-1">
-                    <div className="company-logo">
-                      <a href="job-details.html">
-                        <img src={ImageBackgroundCompany} alt="logo" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-md-10">
-                    <div className="job-info">
-                      <div className="form-check">
-                        <input
-                          className="form-check-input "
-                          type="radio"
-                          name="flexRadioDefault3"
-                          id="flexRadioDefault3"
-                          defaultChecked
-                        />
-                        <label
-                          className="form-check-label "
-                          htmlFor="flexRadioDefault1"
-                        >
-                          <h5>#76666 - [PEG] - Lắp mới wifi tòa nhà</h5>
-                        </label>
-                      </div>
-
-                      <ul>
-                        <li>
-                          <i className="bx bx-user"></i>
-                          Tên khách hàng :
-                        </li>
-                        <li>Bùi Văn Giang</li>
-                      </ul>
-                      <span className="btn btn-outline-danger">
-                        Quá hạn thanh toán
-                      </span>
-                    </div>
-                  </div>
-                  <div className="col-md-1">
-                    <div className="form-check text-center">
-                      <input
-                        className="form-check-input item-checkbox-payment "
-                        style={{ margin: "0 50%" }}
-                        type="checkbox"
-                        value=""
-                        id="flexCheckDefault"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div
-                    className="d-flex justify-content-end"
-                    style={{ position: "relative" }}
-                  >
-                    <div className="d-flex job-card-two-currency">
-                      <h6>Số tiền :</h6>
-                      <h6>275.000đ</h6>
-                    </div>
-                  </div>
-                </div>
+                  Thanh toán
+                </button>
               </div>
             </div>
           </div>
-          <div className="col-lg-12 mr-3">
-            <div className="form-check text-end">
-              <h6>Tổng cộng</h6>
-              <h4>825.000đ</h4>
-            </div>
+        ) : (
+          <div className="container">
+            <h4 className="text-center text-primary">
+              Không tìm thấy thông tin gói cước
+            </h4>
           </div>
-          <div className="col-lg-12 mr-3 mt-3">
-            <div className="form-check d-flex justify-content-end">
-              <button className="btn btn-secondary mr-3 ">Hủy</button>
-              <button className="btn btn-primary">Thanh toán</button>
-            </div>
-          </div>
-        </div>
+        )}
       </section>
 
       <section className="main-info  pb-70" id="contact">
