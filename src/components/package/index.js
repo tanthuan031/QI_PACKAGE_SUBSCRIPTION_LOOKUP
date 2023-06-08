@@ -372,15 +372,12 @@ const PackageComponent = (props) => {
                               </label>
                             </div>
 
-                            {/* <ul>
-                              <li>
-                                <i className="bx bx-user"></i>
-                                Tên khách hàng :
+                            <ul>
+                              <li style={{ fontWeight: 700 }}>Kỳ cước :</li>
+                              <li style={{ fontWeight: 500 }}>
+                                Tháng {index + 1}
                               </li>
-                              <li>
-                                {dataLookupPackage.customer[0].customer_name}
-                              </li>
-                            </ul> */}
+                            </ul>
                             {dataLookupPackage.customer[0].status === 0 ? (
                               <span className="btn btn-outline-warning">
                                 Chưa thanh toán
