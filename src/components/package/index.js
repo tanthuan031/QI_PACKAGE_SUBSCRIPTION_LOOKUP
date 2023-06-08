@@ -21,6 +21,8 @@ import {
   setDataPayment,
   setIsCreatePayment,
 } from "src/redux/reducer/payment/payment.reducer";
+import { BlockUICLIENT } from "../commons/Layouts/Notiflix";
+import Notiflix from "notiflix";
 const PackageComponent = (props) => {
   const dispatch = useDispatch();
   const VND = new Intl.NumberFormat("vi-VN", {
@@ -50,6 +52,8 @@ const PackageComponent = (props) => {
   const [dataLookupPackage, setDataLookupPackage] = useState(undefined);
 
   const handleSearch = (e) => {
+    BlockUICLIENT("#package_checkout");
+
     e.preventDefault();
 
     const filteredData = listData.filter((item) => {
@@ -64,6 +68,9 @@ const PackageComponent = (props) => {
       const customerPackages = listPackage.filter((itm) => {
         return filteredData[0].package_code.includes(itm.package_code);
       });
+      setTimeout(() => {
+        Notiflix.Block.remove("#package_checkout");
+      }, 1000);
       setDataLookupPackage({
         package: customerPackages,
         customer: filteredData,
@@ -71,6 +78,7 @@ const PackageComponent = (props) => {
     } else {
       setDataLookupPackage(undefined);
     }
+    Notiflix.Block.remove("#package_checkout");
   };
 
   // Check
@@ -282,7 +290,7 @@ const PackageComponent = (props) => {
         </div>
       </div>
 
-      <section className="job-style-two pb-70">
+      <section className="job-style-two pb-70" id="package_checkout">
         {dataLookupPackage !== undefined ? (
           <div
             className="container"
@@ -438,7 +446,7 @@ const PackageComponent = (props) => {
         ) : (
           <div className="container">
             <h4 className="text-center text-primary">
-              Không tìm thấy thông tin gói cước
+              Không tìm thấy khách hàng
             </h4>
           </div>
         )}
