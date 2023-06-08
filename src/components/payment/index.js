@@ -283,7 +283,7 @@ const PaymentComponent = (props) => {
                         type="radio"
                         label={
                           <img
-                            className="iconIamge"
+                            className="iconIamgeVNPAGE"
                             src={iconVNPAY}
                             width={"50px"}
                           />
@@ -297,7 +297,7 @@ const PaymentComponent = (props) => {
                         type="radio"
                         label={
                           <img
-                            className="iconIamge"
+                            className="iconIamgeMOMO"
                             src={iconMOMO}
                             width={"50px"}
                           />
@@ -311,7 +311,7 @@ const PaymentComponent = (props) => {
                         type="radio"
                         label={
                           <img
-                            className="iconIamge"
+                            className="iconIamgeVISA"
                             src={iconVISA}
                             width={"50px"}
                           />
