@@ -305,22 +305,52 @@ const PackageComponent = (props) => {
             }}
           >
             <div className="row ">
-              <h5 className="text-center">Danh sách gói cước</h5>
-              <div className=" col-md-12 col-sm-12 mt-2">
-                <span className="" style={{ fontWeight: "500" }}>
-                  <i className="bx bx-user"></i>
-                  Tên khách hàng :
-                </span>
-                <span>{dataLookupPackage.customer[0].customer_name}</span>
-              </div>
-              <div className=" col-md-12 col-sm-12 mt-2">
-                <span style={{ fontWeight: "500" }}>
-                  <i className="bx bx-phone"></i>
-                  Số điện thoại :
-                </span>
-                <span>{dataLookupPackage.customer[0].customer_phone}</span>
+              <h5 className="text-center">Thông tin khách hàng</h5>
+              <div className="col-lg-12">
+                <div className="job-card-two">
+                  <div className="row align-items-center">
+                    <div className="col-md-12">
+                      <div className=" job-info">
+                        <ul>
+                          <li style={{ fontWeight: 700 }}>Tên khách hàng</li>
+                          <li style={{ fontWeight: 500 }}>
+                            {dataLookupPackage.customer[0].customer_name}
+                          </li>
+                        </ul>
+                        <div className="d-flex justify-content-between">
+                          <ul>
+                            <li style={{ fontWeight: 700 }}>
+                              <i className="bx bx-phone-call"></i>
+                            </li>
+                            <li style={{ fontWeight: 500 }}>
+                              {" "}
+                              {dataLookupPackage.customer[0].customer_phone}
+                            </li>
+                          </ul>
+                          <ul>
+                            <li style={{ fontWeight: 700 }}>
+                              <i className="bx bx-id-card"></i>
+                            </li>
+                            <li style={{ fontWeight: 500 }}>
+                              #{dataLookupPackage.customer[0].customer_code}
+                            </li>
+                          </ul>
+                          <ul>
+                            <li style={{ fontWeight: 700 }}>
+                              <i className="bx bx-buildings"></i>
+                            </li>
+                            <li style={{ fontWeight: 500 }}>
+                              {dataLookupPackage.customer[0].customer_address}{" "}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            <h5 className="text-center">Danh sách gói cước</h5>
             <div className="row">
               <div className="col-lg-12">
                 <div className="form-check d-flex justify-content-end mb-2">
@@ -349,14 +379,14 @@ const PackageComponent = (props) => {
                   <div className="col-lg-12" key={index}>
                     <div className="job-card-two">
                       <div className="row align-items-center">
-                        <div className="col-md-1">
+                        {/* <div className="col-md-1">
                           <div className="company-logo">
                             <a href="job-details.html">
                               <img src={ImageBackgroundCompany} alt="logo" />
                             </a>
                           </div>
-                        </div>
-                        <div className="col-md-10">
+                        </div> */}
+                        <div className="col-md-11">
                           <div className="job-info">
                             <div className="form-check">
                               <input
@@ -597,17 +627,27 @@ const PackageComponent = (props) => {
                   điều hành doanh nghiệp.
                 </p>
                 <div className="footer-social">
-                  <a href="#" target="_blank">
-                    <i className="fa fa-facebook"></i>
+                  <a
+                    href="https://www.facebook.com/QiTechnologies"
+                    target="_blank"
+                  ></a>
+                  <a
+                    href="https://www.linkedin.com/company/qi-technologies-corporation"
+                    target="_blank"
+                  >
+                    <i class="bx bxl-linkedin-square"></i>
                   </a>
-                  <a href="#" target="_blank">
-                    <i className="bx bxl-twitter"></i>
+                  <a
+                    href="https://www.youtube.com/channel/UCKXpvNwUuxxmpWOqUBkodcQ"
+                    target="_blank"
+                  >
+                    <i className="bx bxl-youtube text-danger"></i>
                   </a>
-                  <a href="#" target="_blank">
-                    <i className="bx bxl-pinterest-alt"></i>
-                  </a>
-                  <a href="#" target="_blank">
-                    <i className="bx bxl-linkedin"></i>
+                  <a
+                    href="https://www.facebook.com/QiTechnologies"
+                    target="_blank"
+                  >
+                    <i class="bx bxl-facebook-circle"></i>
                   </a>
                 </div>
               </div>
@@ -617,19 +657,19 @@ const PackageComponent = (props) => {
                 <h3>Tài liệu kham khảo</h3>
                 <ul>
                   <li>
-                    <a href="index.html">
+                    <a href="https://qi.com.vn/docs/DIEU-KHOAN-CHUNG-HOP-DONG-CUNG-CAP-VA-SU-DUNG-DICH-VU-QI.docx">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Điều khoản chung
                     </a>
                   </li>
                   <li>
-                    <a href="about.html">
+                    <a href="https://qi.com.vn/docs/MAU-HOP-DONG-INTERNET-QINET.docx">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Hợp đồng cung cấp dịch vụ
                     </a>
                   </li>
                   <li>
-                    <a href="faq.html">
+                    <a href="https://qi.com.vn/docs/Q%C4%90-28-TB-cuoc-2022.pdf">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Bảng cước dịch vụ QiNET
                     </a>
@@ -642,31 +682,26 @@ const PackageComponent = (props) => {
                 <h3>Công Ty</h3>
                 <ul>
                   <li>
-                    <a href="#">
+                    <a href="https://qi.com.vn/about-us">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Về chúng tôi
                     </a>
                   </li>
                   <li>
-                    <a href="account.html">
+                    <a href="https://qi.com.vn/career">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Tuyển dụng
                     </a>
                   </li>
                   <li>
-                    <a href="catagories.html">
+                    <a href="https://qi.com.vn/contact">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Liên hệ
                     </a>
                   </li>
+
                   <li>
-                    <a href="resume.html">
-                      <i className="bx bx-chevrons-right bx-tada"></i>
-                      Resume
-                    </a>
-                  </li>
-                  <li>
-                    <a href="job-list.html">
+                    <a href="https://qi.com.vn/customer-partner">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Khách hàng - Đối tác
                     </a>

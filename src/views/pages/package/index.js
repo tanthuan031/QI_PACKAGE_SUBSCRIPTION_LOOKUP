@@ -17,6 +17,8 @@ const PackagePage = () => {
         service_code: "0001", //Mã dịch vụ
         package_code: ["01"],
         status: 0,
+        customer_address:
+          "U14b - 16a, Đường số 22, KCX Tân Thuận, P. Tân Thuận Đông, Quận 7, Tp. Hồ Chí Minh",
       },
       {
         id: 2,
@@ -27,6 +29,8 @@ const PackagePage = () => {
         service_code: "0001", //Mã dịch vụ
         package_code: ["01", "02", "04"],
         status: 0,
+        customer_address:
+          "U14b - 16a, Đường số 22, KCX Tân Thuận, P. Tân Thuận Đông, Quận 7, Tp. Hồ Chí Minh",
       },
       {
         id: 3,
@@ -37,6 +41,8 @@ const PackagePage = () => {
         service_code: "0001", //Mã dịch vụ
         package_code: ["01", "03"],
         status: 0,
+        customer_address:
+          "U14b - 16a, Đường số 22, KCX Tân Thuận, P. Tân Thuận Đông, Quận 7, Tp. Hồ Chí Minh",
       },
       {
         id: 4,
@@ -47,6 +53,8 @@ const PackagePage = () => {
         service_code: "0001", //Mã dịch vụ
         package_code: ["01", "02", "05", "04"],
         status: 0,
+        customer_address:
+          "U14b - 16a, Đường số 22, KCX Tân Thuận, P. Tân Thuận Đông, Quận 7, Tp. Hồ Chí Minh",
       },
       {
         id: 5,
@@ -57,6 +65,8 @@ const PackagePage = () => {
         service_code: "0001", //Mã dịch vụ
         package_code: ["02", "05", "04"],
         status: 0,
+        customer_address:
+          "U14b - 16a, Đường số 22, KCX Tân Thuận, P. Tân Thuận Đông, Quận 7, Tp. Hồ Chí Minh",
       },
     ];
 

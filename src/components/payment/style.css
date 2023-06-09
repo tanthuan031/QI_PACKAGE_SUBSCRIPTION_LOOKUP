@@ -4,6 +4,12 @@ body {
   line-height: 25px;
   position: relative;
 }
+.banner-style-three-payment {
+  background-image: url(../../assets/img/rectangle.png);
+  background-size: cover;
+  background-position: center center;
+  height: 1000px;
+}
 .disabled-none {
   display: none;
 }

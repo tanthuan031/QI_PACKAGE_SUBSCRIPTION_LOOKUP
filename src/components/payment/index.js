@@ -150,7 +150,7 @@ const PaymentComponent = (props) => {
   const handleShow = () => setShow(true);
   return (
     <>
-      <div className="container mt-5">
+      <div className="container mt-5 ">
         <h3 className="text-center mb-5">Thông tin thanh toán</h3>
         <div className="container">
           <div className="row">
@@ -165,6 +165,7 @@ const PaymentComponent = (props) => {
             >
               <div>
                 <h5 className="text-center mb-5 ">Thông tin khách hàng</h5>
+                <hr></hr>
                 <div className=" col-md-12 col-sm-12 mt-2">
                   <span className="" style={{ fontWeight: "500" }}>
                     <i className="bx bx-user"></i>
@@ -179,70 +180,84 @@ const PaymentComponent = (props) => {
                   </span>
                   <span> {dataCheckout.customers[0].customer_phone}</span>
                 </div>
+                <div className=" col-md-12 col-sm-12 mt-2">
+                  <span style={{ fontWeight: "500" }}>
+                    <i className="bx bx-phone"></i>
+                    Địa chỉ :
+                  </span>
+                  <span> {dataCheckout.customers[0].customer_address}</span>
+                </div>
               </div>
-
+              <hr></hr>
               <h5 className="text-center mb-4 mt-4"> Danh sách gói cước</h5>
-
-              {dataCheckout !== undefined &&
-                dataCheckout.packages.map((item, index) => {
-                  return (
-                    <div className="col-lg-12 ">
-                      <div className="job-card-two">
-                        <div className="row align-items-center">
-                          <div className="col-md-12">
-                            <div className="job-info">
-                              <div className="form-check">
-                                <input
-                                  className="form-check-input "
-                                  type="radio"
-                                  name={`flexRadioDefault${index}`}
-                                  id={`flexRadioDefault${index}`}
-                                  defaultChecked
-                                />
-                                <label
-                                  className="form-check-label "
-                                  htmlFor={`flexRadioDefault${index}`}
-                                >
-                                  <div
-                                    style={{
-                                      fontSize: "1.1rem",
-                                      fontWeight: 500,
-                                    }}
+              <div
+                style={{
+                  maxHeight: "600px",
+                  overflowY: "scroll",
+                }}
+              >
+                {" "}
+                {dataCheckout !== undefined &&
+                  dataCheckout.packages.map((item, index) => {
+                    return (
+                      <div className="col-lg-12">
+                        <div className="job-card-two">
+                          <div className="row align-items-center">
+                            <div className="col-md-12">
+                              <div className="job-info">
+                                <div className="form-check">
+                                  <input
+                                    className="form-check-input "
+                                    type="radio"
+                                    name={`flexRadioDefault${index}`}
+                                    id={`flexRadioDefault${index}`}
+                                    defaultChecked
+                                  />
+                                  <label
+                                    className="form-check-label "
+                                    htmlFor={`flexRadioDefault${index}`}
                                   >
-                                    #{item.package_code} - {item.package_name}
-                                  </div>
-                                </label>
+                                    <div
+                                      style={{
+                                        fontSize: "1.1rem",
+                                        fontWeight: 500,
+                                      }}
+                                    >
+                                      #{item.package_code} - {item.package_name}
+                                    </div>
+                                  </label>
+                                </div>
+                                <ul>
+                                  <li style={{ fontWeight: 700 }}>Kỳ cước :</li>
+                                  <li style={{ fontWeight: 500 }}>
+                                    Tháng {index + 1}
+                                  </li>
+                                </ul>
+                                <span
+                                  className="btn btn-outline-warning"
+                                  style={{ marginBottom: "30px" }}
+                                >
+                                  Chưa thanh toán
+                                </span>
                               </div>
-                              <ul>
-                                <li style={{ fontWeight: 700 }}>Kỳ cước :</li>
-                                <li style={{ fontWeight: 500 }}>
-                                  Tháng {index + 1}
-                                </li>
-                              </ul>
-                              <span
-                                className="btn btn-outline-warning"
-                                style={{ marginBottom: "30px" }}
-                              >
-                                Chưa thanh toán
-                              </span>
                             </div>
                           </div>
-                        </div>
-                        <div className="row">
-                          <div
-                            className="d-flex justify-content-end"
-                            style={{ position: "relative" }}
-                          >
-                            <div className="d-flex job-card-two-currency">
-                              <h6>Số tiền :</h6>
-                              <h6>{VND.format(item.package_price)}</h6>
+                          <div className="row">
+                            <div
+                              className="d-flex justify-content-end"
+                              style={{ position: "relative" }}
+                            >
+                              <div className="d-flex job-card-two-currency">
+                                <h6>Số tiền :</h6>
+                                <h6>{VND.format(item.package_price)}</h6>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+              </div>
             </div>
             <div className="col-md-1"></div>
             <div className=" col-md-4 mt-5 mb-5">
@@ -260,19 +275,19 @@ const PaymentComponent = (props) => {
                 <hr></hr>
                 <div className=" mt-4">
                   <h6 className="d-flex">
-                    <div style={{ width: "50%" }}> Giá tiền :</div>
+                    <div style={{ width: "40%" }}> Giá tiền :</div>
                     <div> {VND.format(dataCheckout.totalPrice)}</div>
                   </h6>
                 </div>
                 <div className="">
                   <h6 className="d-flex">
-                    <div style={{ width: "50%" }}> VAT :</div>
+                    <div style={{ width: "40%" }}> VAT :</div>
                     <div>
                       10% ( {VND.format((dataCheckout.totalPrice * 10) / 100)} )
                     </div>
                   </h6>
                 </div>
-                <div className="mt-5">
+                <div className="mt-3">
                   <div className="text-summary">
                     <h6 className="info-invoice-left">
                       Phương thức thanh toán
@@ -293,7 +308,7 @@ const PaymentComponent = (props) => {
                         value="VNPay"
                         checked
                       />
-                      <Form.Check
+                      {/* <Form.Check
                         type="radio"
                         label={
                           <img
@@ -319,7 +334,7 @@ const PaymentComponent = (props) => {
                         name="payment"
                         id="visa"
                         value="vnpay"
-                      />
+                      /> */}
                     </div>
                   </div>
                 </div>
@@ -329,7 +344,7 @@ const PaymentComponent = (props) => {
                     <div style={{ width: "50%" }}>Tổng tiền :</div>
                     <div className="text-danger text-center">
                       {VND.format(
-                        dataCheckout.totalPrice -
+                        dataCheckout.totalPrice +
                           (dataCheckout.totalPrice * 10) / 100
                       )}
                       <p
@@ -373,7 +388,7 @@ const PaymentComponent = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <footer className="footer-area pt-100 pb-70 mt-5">
+      <footer className="footer-area pt-100 pb-70 mt-5" id="footer">
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-sm-6">
@@ -395,17 +410,27 @@ const PaymentComponent = (props) => {
                   điều hành doanh nghiệp.
                 </p>
                 <div className="footer-social">
-                  <a href="#" target="_blank">
-                    <i className="fa fa-facebook"></i>
+                  <a
+                    href="https://www.facebook.com/QiTechnologies"
+                    target="_blank"
+                  ></a>
+                  <a
+                    href="https://www.linkedin.com/company/qi-technologies-corporation"
+                    target="_blank"
+                  >
+                    <i class="bx bxl-linkedin-square"></i>
                   </a>
-                  <a href="#" target="_blank">
-                    <i className="bx bxl-twitter"></i>
+                  <a
+                    href="https://www.youtube.com/channel/UCKXpvNwUuxxmpWOqUBkodcQ"
+                    target="_blank"
+                  >
+                    <i className="bx bxl-youtube text-danger"></i>
                   </a>
-                  <a href="#" target="_blank">
-                    <i className="bx bxl-pinterest-alt"></i>
-                  </a>
-                  <a href="#" target="_blank">
-                    <i className="bx bxl-linkedin"></i>
+                  <a
+                    href="https://www.facebook.com/QiTechnologies"
+                    target="_blank"
+                  >
+                    <i class="bx bxl-facebook-circle"></i>
                   </a>
                 </div>
               </div>
@@ -415,19 +440,19 @@ const PaymentComponent = (props) => {
                 <h3>Tài liệu kham khảo</h3>
                 <ul>
                   <li>
-                    <a href="index.html">
+                    <a href="https://qi.com.vn/docs/DIEU-KHOAN-CHUNG-HOP-DONG-CUNG-CAP-VA-SU-DUNG-DICH-VU-QI.docx">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Điều khoản chung
                     </a>
                   </li>
                   <li>
-                    <a href="about.html">
+                    <a href="https://qi.com.vn/docs/MAU-HOP-DONG-INTERNET-QINET.docx">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Hợp đồng cung cấp dịch vụ
                     </a>
                   </li>
                   <li>
-                    <a href="faq.html">
+                    <a href="https://qi.com.vn/docs/Q%C4%90-28-TB-cuoc-2022.pdf">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Bảng cước dịch vụ QiNET
                     </a>
@@ -440,31 +465,26 @@ const PaymentComponent = (props) => {
                 <h3>Công Ty</h3>
                 <ul>
                   <li>
-                    <a href="#">
+                    <a href="https://qi.com.vn/about-us">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Về chúng tôi
                     </a>
                   </li>
                   <li>
-                    <a href="account.html">
+                    <a href="https://qi.com.vn/career">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Tuyển dụng
                     </a>
                   </li>
                   <li>
-                    <a href="catagories.html">
+                    <a href="https://qi.com.vn/contact">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Liên hệ
                     </a>
                   </li>
+
                   <li>
-                    <a href="resume.html">
-                      <i className="bx bx-chevrons-right bx-tada"></i>
-                      Resume
-                    </a>
-                  </li>
-                  <li>
-                    <a href="job-list.html">
+                    <a href="https://qi.com.vn/customer-partner">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Khách hàng - Đối tác
                     </a>
