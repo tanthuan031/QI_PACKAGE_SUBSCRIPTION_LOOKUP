@@ -673,7 +673,7 @@ const PackageComponent = (props) => {
                     href="https://www.linkedin.com/company/qi-technologies-corporation"
                     target="_blank"
                   >
-                    <i class="bx bxl-linkedin-square"></i>
+                    <i className="bx bxl-linkedin-square"></i>
                   </a>
                   <a
                     href="https://www.youtube.com/channel/UCKXpvNwUuxxmpWOqUBkodcQ"
@@ -685,7 +685,7 @@ const PackageComponent = (props) => {
                     href="https://www.facebook.com/QiTechnologies"
                     target="_blank"
                   >
-                    <i class="bx bxl-facebook-circle"></i>
+                    <i className="bx bxl-facebook-circle"></i>
                   </a>
                 </div>
               </div>

@@ -52,6 +52,7 @@ const ProductComponent = (props) => {
       existingCartData.push(newProduct);
     }
     localStorage.setItem("dataCart", JSON.stringify(existingCartData));
+    setDataCart(existingCartData);
   };
   useEffect(() => {
     const existingCartCountData =
@@ -60,7 +61,7 @@ const ProductComponent = (props) => {
 
     const existingCartData = JSON.parse(localStorage.getItem("dataCart")) || [];
     setDataCart(existingCartData);
-  }, [dispatch, handleAddCart]);
+  }, [dispatch]);
   const isItemInCart = (item) => {
     // Kiểm tra xem sản phẩm đã tồn tại trong dataCart hay không
     return dataCart.find(
@@ -82,7 +83,7 @@ const ProductComponent = (props) => {
             <div className="row">
               {dataFamily.map((item, index) => {
                 return (
-                  <div className="col-xl-3 col-sm-6 col-12 mt-3">
+                  <div className="col-xl-3 col-sm-6 col-12 mt-3" key={index}>
                     <div className="card-product">
                       <div className="card-product-header">
                         <h4 className="text-center">{item.name_package}</h4>
@@ -293,7 +294,7 @@ const ProductComponent = (props) => {
                     href="https://www.linkedin.com/company/qi-technologies-corporation"
                     target="_blank"
                   >
-                    <i class="bx bxl-linkedin-square"></i>
+                    <i className="bx bxl-linkedin-square"></i>
                   </a>
                   <a
                     href="https://www.youtube.com/channel/UCKXpvNwUuxxmpWOqUBkodcQ"
@@ -305,7 +306,7 @@ const ProductComponent = (props) => {
                     href="https://www.facebook.com/QiTechnologies"
                     target="_blank"
                   >
-                    <i class="bx bxl-facebook-circle"></i>
+                    <i className="bx bxl-facebook-circle"></i>
                   </a>
                 </div>
               </div>

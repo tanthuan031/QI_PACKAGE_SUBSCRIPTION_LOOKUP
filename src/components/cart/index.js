@@ -89,16 +89,16 @@ const CartDetailComponent = (props) => {
 
       return result;
     }, {});
-
+    const values = Object.values(processedData);
+    const result = values.join(", ");
     const dataSubmit = {
       full_name: data.full_name,
       phone: data.phone,
       email: data.email,
-      service: JSON.stringify(processedData),
+      service: result,
       message: data.notes,
     };
-
-    BlockUIAPI("#root");
+    BlockUIAPI("#cart");
     axios
       .post("https://qi.com.vn/internet-register/sendInfo", dataSubmit)
       .then((response) => {
@@ -112,7 +112,7 @@ const CartDetailComponent = (props) => {
         localStorage.removeItem("countCart");
         setTimeout(() => {
           window.location.href = "/";
-        }, 3000);
+        }, 2000);
       })
       .catch((error) => {
         // Xử lý khi gửi thất bại

@@ -11,7 +11,7 @@ const CartPage = () => {
   const isCheckCartDetail = useSelector(isCartItemSelector);
   return (
     <>
-      <div className="row ">
+      <div className="row " id="cart-sl">
         <CartDetailComponent />
       </div>
     </>
