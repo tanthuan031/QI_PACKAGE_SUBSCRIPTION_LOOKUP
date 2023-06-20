@@ -341,6 +341,7 @@ const PackageComponent = (props) => {
                                 <i className="bx bx-phone-call"></i>
                               </li>
                               <li style={{ fontWeight: 500 }}>
+                                Số điện thoại:{" "}
                                 {dataLookupPackage.customer[0].customer_phone}
                               </li>
                             </ul>
@@ -351,6 +352,7 @@ const PackageComponent = (props) => {
                                 <i className="bx bx-id-card"></i>
                               </li>
                               <li style={{ fontWeight: 500 }}>
+                                CMND/CCCD:
                                 {
                                   dataLookupPackage.customer[0]
                                     .customer_identifier_code
@@ -364,19 +366,20 @@ const PackageComponent = (props) => {
                                 <i className="bx bx-user"></i>
                               </li>
                               <li style={{ fontWeight: 500 }}>
+                                Mã định danh:{" "}
                                 {dataLookupPackage.customer[0].customer_code}
                               </li>
                             </ul>
                           )}
 
-                          <ul>
+                          {/* <ul>
                             <li style={{ fontWeight: 700 }}>
                               <i className="bx bx-buildings"></i>
                             </li>
                             <li style={{ fontWeight: 500 }}>
                               {dataLookupPackage.customer[0].customer_address}{" "}
                             </li>
-                          </ul>
+                          </ul> */}
                         </div>
                       </div>
                     </div>

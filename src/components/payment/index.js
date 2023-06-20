@@ -180,13 +180,13 @@ const PaymentComponent = (props) => {
                   </span>
                   <span> {dataCheckout.customers[0].customer_phone}</span>
                 </div>
-                <div className=" col-md-12 col-sm-12 mt-2">
+                {/* <div className=" col-md-12 col-sm-12 mt-2">
                   <span style={{ fontWeight: "500" }}>
                     <i className="bx bx-phone"></i>
                     Địa chỉ :
                   </span>
                   <span> {dataCheckout.customers[0].customer_address}</span>
-                </div>
+                </div> */}
               </div>
               <hr></hr>
               <h5 className="text-center mb-4 mt-4"> Danh sách gói cước</h5>
