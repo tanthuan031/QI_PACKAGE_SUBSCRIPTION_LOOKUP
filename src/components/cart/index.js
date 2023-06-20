@@ -239,25 +239,25 @@ const CartDetailComponent = (props) => {
                                         >
                                           <option
                                             value="1"
-                                            // selected={
-                                            //   item.quantity == 1 ? true : false
-                                            // }
+                                            selected={
+                                              item.quantity == 1 ? true : false
+                                            }
                                           >
                                             1
                                           </option>
                                           <option
                                             value="6"
-                                            // selected={
-                                            //   item.quantity == 6 ? true : false
-                                            // }
+                                            selected={
+                                              item.quantity == 6 ? true : false
+                                            }
                                           >
                                             6
                                           </option>
                                           <option
                                             value="12"
-                                            // selected={
-                                            //   item.quantity == 12 ? true : false
-                                            // }
+                                            selected={
+                                              item.quantity == 12 ? true : false
+                                            }
                                           >
                                             12
                                           </option>
