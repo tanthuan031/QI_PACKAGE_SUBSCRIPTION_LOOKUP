@@ -28,39 +28,58 @@ import CIcon from "@coreui/icons-react";
 
 import avatar8 from "./../../assets/images/avatars/8.jpg";
 import { NavLink } from "react-router-dom";
+import { Badge } from "react-bootstrap";
+import { FaShoppingCart } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { countCartItemSelector } from "src/redux/selectors/product/product.selector";
 
 const AppHeaderDropdown = () => {
+  const countCart = useSelector(countCartItemSelector);
   return (
-    <CDropdown variant="nav-item">
-      <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-        <CHeaderNav>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink>
-          </CNavItem>
-        </CHeaderNav>
-      </CDropdownToggle>
-      <CDropdownMenu className="pt-0" placement="bottom-end">
-        <CDropdownHeader className="bg-light fw-semibold py-2">
-          Menu
-        </CDropdownHeader>
-        <CDropdownItem href="#">Trang chủ</CDropdownItem>
-        <CDropdownItem href="#footer">Về chúng tôi</CDropdownItem>
-        <CDropdownItem href="#contact">Liên hệ</CDropdownItem>
+    <>
+      <div className="d-flex">
+        <CNavItem style={{ marginRight: "20px" }}>
+          <CNavLink href="/cart">
+            <FaShoppingCart style={{ fontSize: "1.3rem" }} />
+            <Badge style={{ position: "absolute" }}>{countCart}</Badge>
+          </CNavLink>
+        </CNavItem>
+        <CDropdown variant="nav-item">
+          <CDropdownToggle
+            placement="bottom-end"
+            className="py-0"
+            caret={false}
+          >
+            <CHeaderNav>
+              <CNavItem>
+                <CNavLink href="#">
+                  <CIcon icon={cilList} size="lg" />
+                </CNavLink>
+              </CNavItem>
+            </CHeaderNav>
+          </CDropdownToggle>
+          <CDropdownMenu className="pt-0" placement="bottom-end">
+            <CDropdownHeader className="bg-light fw-semibold py-2">
+              Menu
+            </CDropdownHeader>
+            <CDropdownItem href="/">Trang chủ</CDropdownItem>
+            <CDropdownItem href="#footer">Về chúng tôi</CDropdownItem>
+            <CDropdownItem href="#contact">Liên hệ</CDropdownItem>
 
-        <CDropdownItem href="#">
-          <CNavItem>
-            <CNavLink
-              href="#find-section"
-              className="btn btn-primary custom-btn-header text-white   "
-            >
-              Tra cứu ngay
-            </CNavLink>
-          </CNavItem>
-        </CDropdownItem>
-      </CDropdownMenu>
-    </CDropdown>
+            <CDropdownItem href="#">
+              {/* <CNavItem> */}
+              <CNavLink
+                href="/#find-section"
+                className="btn btn-primary custom-btn-header text-white   "
+              >
+                Tra cứu ngay
+              </CNavLink>
+              {/* </CNavItem> */}
+            </CDropdownItem>
+          </CDropdownMenu>
+        </CDropdown>
+      </div>
+    </>
   );
 };
 

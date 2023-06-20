@@ -30,7 +30,11 @@ const PackageComponent = (props) => {
     currency: "VND",
   });
   const [selectAll, setSelectAll] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("Mã định danh");
 
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+  };
   const handleSelectAll = (event) => {
     const checkboxes = document.querySelectorAll(
       'input[type="checkbox"][id^="flexCheckDefault"]'
@@ -53,15 +57,15 @@ const PackageComponent = (props) => {
 
   const handleSearch = (e) => {
     BlockUICLIENT("#package_checkout");
-
     e.preventDefault();
-
     const filteredData = listData.filter((item) => {
-      return (
-        item.customer_identifier_code === dataSearch ||
-        item.customer_phone === dataSearch ||
-        item.customer_code === dataSearch
-      );
+      if (selectedItem == "Mã định danh") {
+        return item.customer_code === dataSearch;
+      } else if (selectedItem == "CCCD-CMND") {
+        return item.customer_identifier_code === dataSearch;
+      } else if (selectedItem == "Số điện thoại") {
+        return item.customer_phone === dataSearch;
+      }
     });
 
     if (filteredData.length > 0) {
@@ -76,7 +80,7 @@ const PackageComponent = (props) => {
         customer: filteredData,
       });
     } else {
-      setDataLookupPackage(undefined);
+      setDataLookupPackage(null);
     }
     Notiflix.Block.remove("#package_checkout");
   };
@@ -93,8 +97,8 @@ const PackageComponent = (props) => {
     // Cập nhật trạng thái checkbox của item được chọn/bỏ chọn
     setCheckedItems((prevCheckedItems) => {
       if (isChecked) {
-        console.log(checkedItems.length + 1);
-        console.log(dataLookupPackage.package.length);
+        // console.log(checkedItems.length + 1);
+        // console.log(dataLookupPackage.package.length);
         if (checkedItems.length + 1 == dataLookupPackage.package.length) {
           setIsCheckedAll(true);
         } else {
@@ -102,7 +106,7 @@ const PackageComponent = (props) => {
         }
         return [...prevCheckedItems, item];
       } else {
-        console.log(checkedItems.length, dataLookupPackage.package.length);
+        // console.log(checkedItems.length, dataLookupPackage.package.length);
         if (checkedItems.length + 1 !== dataLookupPackage.package.length) {
           setIsCheckedAll(false);
         }
@@ -157,6 +161,7 @@ const PackageComponent = (props) => {
       behavior: "smooth", // Tuỳ chọn cho hiệu ứng di chuyển mượt hơn
     });
   };
+
   return (
     <div className="container-fluid">
       <div className="banner-style-three">
@@ -257,24 +262,36 @@ const PackageComponent = (props) => {
             <div className="row">
               <div className="col-lg-12" style={{ position: "relative" }}>
                 <CInputGroup className="mb-3 input-search">
-                  {/* <CDropdown variant="input-group">
+                  <CDropdown variant="input-group">
                     <CDropdownToggle
                       color="secondary"
                       variant="outline"
                       style={{ width: "15%" }}
                       className="dropdown-custom"
                     >
-                      Địa điểm
+                      {selectedItem || "Mã định danh"}
                     </CDropdownToggle>
                     <CDropdownMenu>
-                      <CDropdownItem href="#">Hồ Chí Minh</CDropdownItem>
-                      <CDropdownItem href="#">Đà Nẵng</CDropdownItem>
-                      <CDropdownItem href="#">Hà Nội</CDropdownItem>
+                      <CDropdownItem
+                        onClick={() => handleItemClick("Mã định danh")}
+                      >
+                        Mã định danh
+                      </CDropdownItem>
+                      <CDropdownItem
+                        onClick={() => handleItemClick("Số điện thoại")}
+                      >
+                        Số điện thoại
+                      </CDropdownItem>
+                      <CDropdownItem
+                        onClick={() => handleItemClick("CCCD-CMND")}
+                      >
+                        CCCD-CMND
+                      </CDropdownItem>
                     </CDropdownMenu>
-                  </CDropdown> */}
+                  </CDropdown>
                   <CFormInput
                     aria-label="Text input with dropdown button"
-                    placeholder="Tìm kiếm theo: Mã định danh/Số điện thoại/CCCD-CMND"
+                    placeholder="Tìm kiếm: Mã định danh/Số điện thoại/CCCD-CMND"
                     className="input-lookup"
                     onChange={(event) => setDataSearch(event.target.value)}
                   />
@@ -295,7 +312,7 @@ const PackageComponent = (props) => {
       </div>
 
       <section className="job-style-two pb-70" id="package_checkout">
-        {dataLookupPackage !== undefined ? (
+        {dataLookupPackage !== undefined && dataLookupPackage !== null && (
           <div
             className="container"
             style={{
@@ -307,7 +324,7 @@ const PackageComponent = (props) => {
             <div className="row ">
               <h5 className="text-center">Thông tin khách hàng</h5>
               <div className="col-lg-12">
-                <div className="job-card-two">
+                <div className="job-card-two package-item-customer">
                   <div className="row align-items-center">
                     <div className="col-md-12">
                       <div className=" job-info">
@@ -318,23 +335,40 @@ const PackageComponent = (props) => {
                           </li>
                         </ul>
                         <div className="d-flex justify-content-between">
-                          <ul>
-                            <li style={{ fontWeight: 700 }}>
-                              <i className="bx bx-phone-call"></i>
-                            </li>
-                            <li style={{ fontWeight: 500 }}>
-                              {" "}
-                              {dataLookupPackage.customer[0].customer_phone}
-                            </li>
-                          </ul>
-                          <ul>
-                            <li style={{ fontWeight: 700 }}>
-                              <i className="bx bx-id-card"></i>
-                            </li>
-                            <li style={{ fontWeight: 500 }}>
-                              #{dataLookupPackage.customer[0].customer_code}
-                            </li>
-                          </ul>
+                          {selectedItem == "Số điện thoại" && (
+                            <ul>
+                              <li style={{ fontWeight: 700 }}>
+                                <i className="bx bx-phone-call"></i>
+                              </li>
+                              <li style={{ fontWeight: 500 }}>
+                                {dataLookupPackage.customer[0].customer_phone}
+                              </li>
+                            </ul>
+                          )}
+                          {selectedItem == "CCCD-CMND" && (
+                            <ul>
+                              <li style={{ fontWeight: 700 }}>
+                                <i className="bx bx-id-card"></i>
+                              </li>
+                              <li style={{ fontWeight: 500 }}>
+                                {
+                                  dataLookupPackage.customer[0]
+                                    .customer_identifier_code
+                                }
+                              </li>
+                            </ul>
+                          )}
+                          {selectedItem == "Mã định danh" && (
+                            <ul>
+                              <li style={{ fontWeight: 700 }}>
+                                <i className="bx bx-user"></i>
+                              </li>
+                              <li style={{ fontWeight: 500 }}>
+                                {dataLookupPackage.customer[0].customer_code}
+                              </li>
+                            </ul>
+                          )}
+
                           <ul>
                             <li style={{ fontWeight: 700 }}>
                               <i className="bx bx-buildings"></i>
@@ -377,7 +411,7 @@ const PackageComponent = (props) => {
               {dataLookupPackage.package.map((item, index) => {
                 return (
                   <div className="col-lg-12" key={index}>
-                    <div className="job-card-two">
+                    <div className="job-card-two package-item">
                       <div className="row align-items-center">
                         {/* <div className="col-md-1">
                           <div className="company-logo">
@@ -401,7 +435,7 @@ const PackageComponent = (props) => {
                                 htmlFor={`flexRadioDefault${index}`}
                               >
                                 <h5>
-                                  #{item.package_code} - {item.package_name}
+                                  #{item.package_name} - {item.package_code}
                                 </h5>
                               </label>
                             </div>
@@ -409,11 +443,11 @@ const PackageComponent = (props) => {
                             <ul>
                               <li style={{ fontWeight: 700 }}>Kỳ cước :</li>
                               <li style={{ fontWeight: 500 }}>
-                                Tháng {index + 1}
+                                {dataLookupPackage.customer[0].billing_period}
                               </li>
                             </ul>
                             {dataLookupPackage.customer[0].status === 0 ? (
-                              <span className="btn btn-outline-warning">
+                              <span className="btn btn-outline-warning btn-cus">
                                 Chưa thanh toán
                               </span>
                             ) : (
@@ -474,7 +508,8 @@ const PackageComponent = (props) => {
               </div>
             </div>
           </div>
-        ) : (
+        )}
+        {dataLookupPackage === null && (
           <div className="container">
             <h4 className="text-center text-primary">
               Không tìm thấy khách hàng
@@ -538,7 +573,7 @@ const PackageComponent = (props) => {
                     margin: "0 34%",
                   }}
                 ></i>
-                <h6>Phát triển giải pháp</h6>
+                <h6 style={{ fontWeight: 700 }}>Phát triển giải pháp</h6>
                 <p>
                   Cung cấp các giải pháp công nghệ tích hợp trí tuệ nhân
                   tạo(AI), tối ưu hóa quy trình quản lý doanh nghiệp{" "}
@@ -556,7 +591,7 @@ const PackageComponent = (props) => {
                     margin: "0 34%",
                   }}
                 ></i>
-                <h6>Dịch vụ Internet</h6>
+                <h6 style={{ fontWeight: 700 }}>Dịch vụ Internet</h6>
                 <p>
                   Cung cấp các giải pháp kết nối Internet cho các đơn vị, tổ
                   chức, doanh nghiệp trên toàn quốc
@@ -576,7 +611,7 @@ const PackageComponent = (props) => {
                     margin: "0 34%",
                   }}
                 ></i>
-                <h6>Công nghệ thông tin</h6>
+                <h6 style={{ fontWeight: 700 }}>Công nghệ thông tin</h6>
                 <p>
                   Tư vấn thiết kế hệ thống công nghệ thông tin mới. Nâng cấp và
                   tối ưu hệ thống sẵn có cho tổ chức và doanh nghiệp{" "}
@@ -594,7 +629,7 @@ const PackageComponent = (props) => {
                     margin: "0 34%",
                   }}
                 ></i>
-                <h6>Năng lượng mặt trời</h6>
+                <h6 style={{ fontWeight: 700 }}>Năng lượng mặt trời</h6>
                 <p>
                   Tư vấn, thiết kế và triển khai các giải pháp năng lượng mặt
                   trời nối lưới(ESCO và EPC)

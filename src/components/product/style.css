@@ -1,0 +1,25 @@
+.card-product {
+  background-color: #fff;
+  height: 500px;
+  min-width: 250px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.card-product-header {
+  height: 100px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.card-product-body-item {
+  margin-top: 20px;
+}
+.firo-title h2 {
+  font-family: Segoe UI, Roboto, sans-serif;
+  color: #002958;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -2px;
+}

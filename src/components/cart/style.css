@@ -1,0 +1,13 @@
+.btn-custom {
+  border-radius: 0;
+  width: 40px;
+}
+.de_in_crease {
+  /* width: 50px; */
+}
+.de_in_crease .input-group {
+  width: 100%;
+}
+#cart #NotiflixBlockWrap-1 {
+  margin-top: -10%;
+}

@@ -160,7 +160,7 @@ const PaymentComponent = (props) => {
                 background: "#fff",
                 borderRadius: "10px",
                 padding: "30px",
-                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.22) !important",
               }}
             >
               <div>
@@ -192,16 +192,15 @@ const PaymentComponent = (props) => {
               <h5 className="text-center mb-4 mt-4"> Danh sách gói cước</h5>
               <div
                 style={{
-                  maxHeight: "600px",
-                  overflowY: "scroll",
+                  maxHeight: "500px",
+                  overflowY: "auto",
                 }}
               >
-                {" "}
                 {dataCheckout !== undefined &&
                   dataCheckout.packages.map((item, index) => {
                     return (
                       <div className="col-lg-12">
-                        <div className="job-card-two">
+                        <div className="job-card-two package-item">
                           <div className="row align-items-center">
                             <div className="col-md-12">
                               <div className="job-info">
@@ -223,18 +222,18 @@ const PaymentComponent = (props) => {
                                         fontWeight: 500,
                                       }}
                                     >
-                                      #{item.package_code} - {item.package_name}
+                                      #{item.package_name} - {item.package_code}
                                     </div>
                                   </label>
                                 </div>
                                 <ul>
                                   <li style={{ fontWeight: 700 }}>Kỳ cước :</li>
                                   <li style={{ fontWeight: 500 }}>
-                                    Tháng {index + 1}
+                                    {dataCheckout.customers[0].billing_period}
                                   </li>
                                 </ul>
                                 <span
-                                  className="btn btn-outline-warning"
+                                  className="btn btn-outline-warning btn-cus"
                                   style={{ marginBottom: "30px" }}
                                 >
                                   Chưa thanh toán
@@ -260,7 +259,7 @@ const PaymentComponent = (props) => {
               </div>
             </div>
             <div className="col-md-1"></div>
-            <div className=" col-md-4 mt-5 mb-5">
+            <div className=" col-md-4  mb-5">
               <div
                 className=""
                 style={{
@@ -277,14 +276,6 @@ const PaymentComponent = (props) => {
                   <h6 className="d-flex">
                     <div style={{ width: "40%" }}> Giá tiền :</div>
                     <div> {VND.format(dataCheckout.totalPrice)}</div>
-                  </h6>
-                </div>
-                <div className="">
-                  <h6 className="d-flex">
-                    <div style={{ width: "40%" }}> VAT :</div>
-                    <div>
-                      10% ( {VND.format((dataCheckout.totalPrice * 10) / 100)} )
-                    </div>
                   </h6>
                 </div>
                 <div className="mt-3">
@@ -343,17 +334,7 @@ const PaymentComponent = (props) => {
                   <h5 className="d-flex">
                     <div style={{ width: "50%" }}>Tổng tiền :</div>
                     <div className="text-danger text-center">
-                      {VND.format(
-                        dataCheckout.totalPrice +
-                          (dataCheckout.totalPrice * 10) / 100
-                      )}
-                      <p
-                        className="text-dark "
-                        style={{ fontWeight: "400", fontSize: ".8rem" }}
-                      >
-                        {" "}
-                        (Đã bao gồm VAT)
-                      </p>
+                      {VND.format(dataCheckout.totalPrice)}
                     </div>
                   </h5>
                 </div>

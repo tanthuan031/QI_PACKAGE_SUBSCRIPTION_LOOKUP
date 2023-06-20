@@ -19,6 +19,15 @@ import { AppBreadcrumb } from "./index";
 import { AppHeaderDropdown } from "./header/index";
 import img from "../assets/img/logo_qi.png";
 import { isCreatePaymentSelector } from "src/redux/selectors";
+import { FaShoppingCart } from "react-icons/fa";
+import { Badge } from "react-bootstrap";
+import { useEffect } from "react";
+import { useState } from "react";
+import { countCartItemSelector } from "src/redux/selectors/product/product.selector";
+import {
+  setCountCartItem,
+  setIsCartItem,
+} from "src/redux/reducer/product/product.reducer";
 const AppHeader = () => {
   const dispatch = useDispatch();
   const sidebarShow = useSelector((state) => state.sidebarShow);
@@ -29,6 +38,17 @@ const AppHeader = () => {
     });
   }
   const isCreatePayment = useSelector(isCreatePaymentSelector);
+  const [countDataCart, setCountDataCart] = useState(0);
+
+  const countCart = useSelector(countCartItemSelector);
+  const handleShowCart = () => {
+    dispatch(setIsCartItem(true));
+  };
+  useEffect(() => {
+    const existingCartCountData =
+      JSON.parse(localStorage.getItem("countCart")) || 0;
+    dispatch(setCountCartItem(existingCartCountData));
+  }, [dispatch]);
   return (
     <CHeader position="sticky" className="">
       <CContainer>
@@ -44,10 +64,15 @@ const AppHeader = () => {
           <CImage className="" rounded src={img} width={100} height={100} />
         </CNavLink>
         {/* </CHeaderBrand> */}
-        <CHeaderNav className="mx-auto d-none d-md-flex me-auto">
+        <CHeaderNav className="mx-auto d-none d-lg-flex me-auto">
           <CNavItem>
-            <CNavLink to="#" component={NavLink} onClick={scrollToTop}>
+            <CNavLink to="/" component={NavLink} onClick={scrollToTop}>
               Trang chủ
+            </CNavLink>
+          </CNavItem>
+          <CNavItem>
+            <CNavLink to="/product" component={NavLink} onClick={scrollToTop}>
+              Gói cước
             </CNavLink>
           </CNavItem>
           <CNavItem>
@@ -65,7 +90,7 @@ const AppHeader = () => {
           ) : (
             <CNavItem>
               <CNavLink
-                href="#find-section"
+                href="/#find-section"
                 className="btn btn-primary custom-btn text-white  "
               >
                 Tra cứu ngay
@@ -73,6 +98,18 @@ const AppHeader = () => {
             </CNavItem>
           )}
         </CHeaderNav>
+
+        {/* <CNavItem className="d-none d-md-flex "> */}
+        <div
+          style={{ position: "relative" }}
+          className="cart-item d-none d-lg-flex"
+        >
+          <CNavLink href="/cart">
+            <FaShoppingCart style={{ fontSize: "1.3rem" }} />
+            <Badge style={{ position: "absolute" }}>{countCart}</Badge>
+          </CNavLink>
+        </div>
+        {/* </CNavItem> */}
 
         {isCreatePayment ? (
           ""
