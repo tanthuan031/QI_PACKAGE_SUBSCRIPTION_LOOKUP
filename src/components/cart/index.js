@@ -144,12 +144,30 @@ const CartDetailComponent = (props) => {
     key: item.title,
     title: item.title,
   }));
+  const handleDeleteCart = (item) => {
+    let exitsCountCart = JSON.parse(localStorage.getItem("countCart"));
+    const updatedDataCart = dataCart.filter(
+      (cartItem) => cartItem.id !== item.id
+    );
+    setDataCart(updatedDataCart);
+    const dataTotal = calculateTotalPrice(updatedDataCart);
+    setTotalPrice(dataTotal);
 
+    // Lưu vào localStorage nếu cần
+    localStorage.setItem("dataCart", JSON.stringify(updatedDataCart));
+
+    if (exitsCountCart > 0) {
+      localStorage.setItem("countCart", JSON.stringify(exitsCountCart - 1));
+      dispatch(setCountCartItem(exitsCountCart - 1));
+    }
+  };
   return (
     <div className="container-fluid">
       <div className="container mt-5 mb-5" id="cart">
         <div className="container  ">
-          <h3 className="text-center mb-3">Giỏ hàng</h3>
+          <h3 className="text-center mb-3">
+            {current === 0 ? "Giỏ hàng" : "Thông tin đơn hàng"}
+          </h3>
           {dataCart.length > 0 ? (
             <>
               <Steps current={current} items={items} />
@@ -187,6 +205,7 @@ const CartDetailComponent = (props) => {
                                   <th scope="col">Giá tiền</th>
                                   <th scope="col">Gói/Tháng</th>
                                   <th scope="col">Tổng tiền</th>
+                                  <th scope="col">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -249,6 +268,14 @@ const CartDetailComponent = (props) => {
                                           {VND.format(
                                             item.quantity * item.price_package
                                           )}
+                                        </span>
+                                      </td>
+                                      <td className="text-center cursor-pointer">
+                                        <span
+                                          className="text-bold text-danger "
+                                          onClick={() => handleDeleteCart(item)}
+                                        >
+                                          <i className="bx bx-trash text-center" />
                                         </span>
                                       </td>
                                     </tr>
