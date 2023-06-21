@@ -37,7 +37,15 @@ const AppHeaderDropdown = () => {
   const countCart = useSelector(countCartItemSelector);
   return (
     <>
-      <div className="d-flex">
+      <div className="d-flex justify-conten-between">
+        <CNavItem style={{ marginRight: "20px" }}>
+          <CNavLink
+            href="/#find-section"
+            className="btn btn-primary btn-sm custom-btn-sm text-white  "
+          >
+            Tra cứu ngay
+          </CNavLink>
+        </CNavItem>
         <CNavItem style={{ marginRight: "20px" }}>
           <CNavLink href="/cart">
             <FaShoppingCart style={{ fontSize: "1.3rem" }} />
@@ -66,16 +74,16 @@ const AppHeaderDropdown = () => {
             <CDropdownItem href="#footer">Về chúng tôi</CDropdownItem>
             <CDropdownItem href="#contact">Liên hệ</CDropdownItem>
 
-            <CDropdownItem href="#">
-              {/* <CNavItem> */}
+            {/* <CDropdownItem href="#">
+             
               <CNavLink
                 href="/#find-section"
                 className="btn btn-primary custom-btn-header text-white   "
               >
                 Tra cứu ngay
               </CNavLink>
-              {/* </CNavItem> */}
-            </CDropdownItem>
+         
+            </CDropdownItem> */}
           </CDropdownMenu>
         </CDropdown>
       </div>

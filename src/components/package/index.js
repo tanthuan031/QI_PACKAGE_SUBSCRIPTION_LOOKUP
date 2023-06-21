@@ -23,6 +23,8 @@ import {
 } from "src/redux/reducer/payment/payment.reducer";
 import { BlockUICLIENT } from "../commons/Layouts/Notiflix";
 import Notiflix from "notiflix";
+import CIcon from "@coreui/icons-react";
+import { Tooltip } from "react-bootstrap";
 const PackageComponent = (props) => {
   const dispatch = useDispatch();
   const VND = new Intl.NumberFormat("vi-VN", {
@@ -167,7 +169,7 @@ const PackageComponent = (props) => {
       <div className="banner-style-three">
         <div className="d-table">
           <div className="d-table-cell">
-            <div className="container" style={{ marginTop: "-10%" }}>
+            <div className="container">
               <div className="row">
                 <div className="col-8 col-md-8 col-sm-8">
                   <div className="banner-text">
@@ -223,7 +225,7 @@ const PackageComponent = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="row justify-content-center">
+              {/* <div className="row justify-content-center">
                 <div className="banner-card">
                   <div className="row">
                     <div className="col col-md-4  banner-card-item">
@@ -251,7 +253,7 @@ const PackageComponent = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -267,7 +269,7 @@ const PackageComponent = (props) => {
                       color="secondary"
                       variant="outline"
                       style={{ width: "15%" }}
-                      className="dropdown-custom"
+                      className="dropdown-custom input-lookup"
                     >
                       {selectedItem || "Mã định danh"}
                     </CDropdownToggle>
@@ -291,7 +293,7 @@ const PackageComponent = (props) => {
                   </CDropdown>
                   <CFormInput
                     aria-label="Text input with dropdown button"
-                    placeholder="Tìm kiếm: Mã định danh/Số điện thoại/CCCD-CMND"
+                    placeholder="Nhập để tìm kiếm..."
                     className="input-lookup"
                     onChange={(event) => setDataSearch(event.target.value)}
                   />
@@ -311,7 +313,7 @@ const PackageComponent = (props) => {
         </div>
       </div>
 
-      <section className="job-style-two pb-70" id="package_checkout">
+      <section className="job-style-two " id="package_checkout">
         {dataLookupPackage !== undefined && dataLookupPackage !== null && (
           <div
             className="container"

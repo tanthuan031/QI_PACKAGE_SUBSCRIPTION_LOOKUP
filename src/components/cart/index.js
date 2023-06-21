@@ -461,13 +461,15 @@ const CartDetailComponent = (props) => {
                           </button> */}
 
                           {current < steps.length - 1 && (
-                            <Button
-                              type="primary"
-                              onClick={() => next()}
-                              size="sm"
-                            >
-                              Thanh toán
-                            </Button>
+                            <>
+                              <Button
+                                type="primary"
+                                onClick={() => next()}
+                                size="sm"
+                              >
+                                Thanh toán
+                              </Button>
+                            </>
                           )}
                           {current > 0 && (
                             <Button

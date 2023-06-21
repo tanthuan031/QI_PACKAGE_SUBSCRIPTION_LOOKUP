@@ -64,7 +64,7 @@ const AppHeader = () => {
           <CImage className="" rounded src={img} width={100} height={100} />
         </CNavLink>
         {/* </CHeaderBrand> */}
-        <CHeaderNav className="mx-auto d-none d-lg-flex me-auto">
+        <CHeaderNav className="mx-auto d-none d-lg-flex  me-auto d-md-flex">
           <CNavItem>
             <CNavLink to="/" component={NavLink} onClick={scrollToTop}>
               Trang chủ
@@ -102,7 +102,7 @@ const AppHeader = () => {
         {/* <CNavItem className="d-none d-md-flex "> */}
         <div
           style={{ position: "relative" }}
-          className="cart-item d-none d-lg-flex"
+          className="cart-item d-none d-lg-flex d-md-flex"
         >
           <CNavLink href="/cart">
             <FaShoppingCart style={{ fontSize: "1.3rem" }} />
