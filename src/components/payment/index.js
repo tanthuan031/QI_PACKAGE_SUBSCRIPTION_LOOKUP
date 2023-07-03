@@ -1,29 +1,12 @@
-import React, { useState } from "react";
-import "./style.css";
-import {
-  CAvatar,
-  CButton,
-  CDropdown,
-  CDropdownDivider,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFormInput,
-  CInputGroup,
-} from "@coreui/react";
-import ImageBackgroundSlider from "../../assets/img/no-bgr_logo.png";
-import ImageBackgroundCustomer from "../../assets/img/tag.png";
-import ImageBackgroundCompany from "../../assets/img/company-logo/5.png";
-import ImageBackgroundLogo from "../../assets/img/logo_qi.png";
-import { FaFacebook, FaFacebookSquare, FaStar } from "react-icons/fa";
+import { useState } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { dataPackagePaymentSelector } from "src/redux/selectors";
-import { Alert, Button, Form, Modal } from "react-bootstrap";
+import "./style.css";
 
-import iconVNPAY from "../../utils/logo-vnpay.png";
-import iconMOMO from "../../utils/logo-momo.png";
-import iconVISA from "../../utils/logo-visa.png";
 import { setIsCreatePayment } from "src/redux/reducer/payment/payment.reducer";
+import iconVNPAY from "../../utils/logo-vnpay.png";
+import Footer from "../footer";
 
 const PaymentComponent = (props) => {
   const dispatch = useDispatch();
@@ -148,6 +131,7 @@ const PaymentComponent = (props) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  console.log("dj", dataCheckout.customers.cust_code);
   return (
     <>
       <div className="container mt-5 ">
@@ -171,15 +155,36 @@ const PaymentComponent = (props) => {
                     <i className="bx bx-user"></i>
                     Tên khách hàng :
                   </span>
-                  <span> {dataCheckout.customers[0].customer_name}</span>
+                  <span> {dataCheckout.customers.cust_name}</span>
                 </div>
-                <div className=" col-md-12 col-sm-12 mt-2">
-                  <span style={{ fontWeight: "500" }}>
-                    <i className="bx bx-phone"></i>
-                    Số điện thoại :
-                  </span>
-                  <span> {dataCheckout.customers[0].customer_phone}</span>
-                </div>
+                {dataCheckout.customers.cust_phone !== undefined && (
+                  <div className=" col-md-12 col-sm-12 mt-2">
+                    <span style={{ fontWeight: "500" }}>
+                      <i className="bx bx-phone"></i>
+                      Số điện thoại :
+                    </span>
+                    <span> {dataCheckout.customers.cust_phone}</span>
+                  </div>
+                )}
+                {dataCheckout.customers.cust_code !== undefined && (
+                  <div className=" col-md-12 col-sm-12 mt-2">
+                    <span style={{ fontWeight: "500" }}>
+                      <i className="bx bx-phone"></i>
+                      Mã định danh :
+                    </span>
+                    <span> {dataCheckout.customers.cust_code}</span>
+                  </div>
+                )}
+                {dataCheckout.customers.cust_identity !== undefined && (
+                  <div className=" col-md-12 col-sm-12 mt-2">
+                    <span style={{ fontWeight: "500" }}>
+                      <i className="bx bx-phone"></i>
+                      CMND/CCCD :
+                    </span>
+                    <span> {dataCheckout.customers.cust_identity}</span>
+                  </div>
+                )}
+
                 {/* <div className=" col-md-12 col-sm-12 mt-2">
                   <span style={{ fontWeight: "500" }}>
                     <i className="bx bx-phone"></i>
@@ -222,14 +227,19 @@ const PaymentComponent = (props) => {
                                         fontWeight: 500,
                                       }}
                                     >
-                                      #{item.package_name} - {item.package_code}
+                                      #{item.pay_category} -
+                                      {item.description_vn}
                                     </div>
                                   </label>
                                 </div>
                                 <ul>
                                   <li style={{ fontWeight: 700 }}>Kỳ cước :</li>
                                   <li style={{ fontWeight: 500 }}>
-                                    {dataCheckout.customers[0].billing_period}
+                                    Tháng
+                                    {" " +
+                                      item.bill_period.slice(4) +
+                                      "-" +
+                                      item.bill_period.slice(0, 4)}
                                   </li>
                                 </ul>
                                 <span
@@ -248,7 +258,7 @@ const PaymentComponent = (props) => {
                             >
                               <div className="d-flex job-card-two-currency">
                                 <h6>Số tiền :</h6>
-                                <h6>{VND.format(item.package_price)}</h6>
+                                <h6>{VND.format(item.amount)}</h6>
                               </div>
                             </div>
                           </div>
@@ -369,150 +379,7 @@ const PaymentComponent = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <footer className="footer-area pt-100 pb-70 mt-5" id="footer">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-3 col-sm-6">
-              <div className="footer-widget">
-                <div className="footer-logo">
-                  <a href="index.html">
-                    <img
-                      src={ImageBackgroundLogo}
-                      alt="logo"
-                      width="80px"
-                      height="80px"
-                    />
-                  </a>
-                </div>
-                <p>
-                  Là công ty hàng đầu trong lĩnh vực công nghệ, ứng dụng vào
-                  công việc và cuộc sống, góp phần đổi mới sáng tạo, chuyển đổi
-                  số, ứng dụng công nghệ 4.0 và AI vào việc giám sát, quản lý và
-                  điều hành doanh nghiệp.
-                </p>
-                <div className="footer-social">
-                  <a
-                    href="https://www.facebook.com/QiTechnologies"
-                    target="_blank"
-                  ></a>
-                  <a
-                    href="https://www.linkedin.com/company/qi-technologies-corporation"
-                    target="_blank"
-                  >
-                    <i className="bx bxl-linkedin-square"></i>
-                  </a>
-                  <a
-                    href="https://www.youtube.com/channel/UCKXpvNwUuxxmpWOqUBkodcQ"
-                    target="_blank"
-                  >
-                    <i className="bx bxl-youtube text-danger"></i>
-                  </a>
-                  <a
-                    href="https://www.facebook.com/QiTechnologies"
-                    target="_blank"
-                  >
-                    <i className="bx bxl-facebook-circle"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-sm-6">
-              <div className="footer-widget pl-60">
-                <h3>Tài liệu kham khảo</h3>
-                <ul>
-                  <li>
-                    <a href="https://qi.com.vn/docs/DIEU-KHOAN-CHUNG-HOP-DONG-CUNG-CAP-VA-SU-DUNG-DICH-VU-QI.docx">
-                      <i className="bx bx-chevrons-right bx-tada"></i>
-                      Điều khoản chung
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://qi.com.vn/docs/MAU-HOP-DONG-INTERNET-QINET.docx">
-                      <i className="bx bx-chevrons-right bx-tada"></i>
-                      Hợp đồng cung cấp dịch vụ
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://qi.com.vn/docs/Q%C4%90-28-TB-cuoc-2022.pdf">
-                      <i className="bx bx-chevrons-right bx-tada"></i>
-                      Bảng cước dịch vụ QiNET
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-lg-3 col-sm-6">
-              <div className="footer-widget pl-60">
-                <h3>Công Ty</h3>
-                <ul>
-                  <li>
-                    <a href="https://qi.com.vn/about-us">
-                      <i className="bx bx-chevrons-right bx-tada"></i>
-                      Về chúng tôi
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://qi.com.vn/career">
-                      <i className="bx bx-chevrons-right bx-tada"></i>
-                      Tuyển dụng
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://qi.com.vn/contact">
-                      <i className="bx bx-chevrons-right bx-tada"></i>
-                      Liên hệ
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="https://qi.com.vn/customer-partner">
-                      <i className="bx bx-chevrons-right bx-tada"></i>
-                      Khách hàng - Đối tác
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="col-lg-3 col-sm-6">
-              <div className="footer-widget footer-info">
-                <h3>Thông Tin Liên Hệ</h3>
-                <ul>
-                  <li>
-                    <span>
-                      <i className="bx bxs-phone"></i>
-                      Số điện thoại:
-                    </span>
-                    <a href="tel:1900633827"> 1900633827 - (028) 35149999 </a>
-                  </li>
-                  <li>
-                    <span>
-                      <i className="bx bx-world"></i>
-                      Website:
-                    </span>
-                    <a href="https://qi.com.vn"> qi.com.vn </a>
-                  </li>
-                  <li>
-                    <span>
-                      <i className="bx bxs-envelope"></i>
-                      Email:
-                    </span>
-                    <a href="#"> info@qi.com.vn </a>
-                  </li>
-                  <li>
-                    <span>
-                      <i className="bx bx-location-plus"></i>
-                      Địa chỉ:
-                    </span>
-                    Qi Technologies Corporation, Lô U14b - 16a, Đường số 22, KCX
-                    Tân Thuận, P. Tân Thuận Đông, Quận 7, Tp. Hồ Chí Minh
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
       <div className="copyright-text text-center">
         <p>
           © 2023 - All rights reserved

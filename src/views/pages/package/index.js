@@ -4,6 +4,7 @@ import "./style.css";
 import PaymentComponent from "src/components/payment";
 import { useSelector } from "react-redux";
 import { isCreatePaymentSelector } from "src/redux/selectors";
+import { feeLookup } from "src/api/ApiBill/billAPI";
 const PackagePage = () => {
   useEffect(() => {
     // Tạo dữ liệu mẫu

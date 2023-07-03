@@ -41,6 +41,7 @@
     "jquery": "^3.6.4",
     "notiflix": "^3.2.6",
     "prop-types": "^15.8.1",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
     "react-bootstrap": "^2.7.4",

@@ -1,5 +1,5 @@
 import Notiflix from "notiflix";
-
+import "./style.css";
 export const BlockUICLIENT = (element, position) => {
   Notiflix.Block.arrows(element, "Please wait ...", {
     messageColor: "#ffffff",

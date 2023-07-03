@@ -1,26 +1,32 @@
+import React, { useState } from "react";
+import "./style.css";
 import {
   CAvatar,
   CButton,
   CDropdown,
+  CDropdownDivider,
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
   CFormInput,
   CInputGroup,
 } from "@coreui/react";
-import Notiflix from "notiflix";
-import { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import ImageBackgroundSlider from "../../assets/img/no-bgr_logo.png";
+import ImageBackgroundCustomer from "../../assets/img/tag.png";
+import ImageBackgroundCompany from "../../assets/img/company-logo/5.png";
+import ImageBackgroundLogo from "../../assets/img/logo_qi.png";
+import { FaFacebook, FaFacebookSquare, FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { feeLookup } from "src/api/ApiBill/billAPI";
 import {
   setDataPayment,
   setIsCreatePayment,
 } from "src/redux/reducer/payment/payment.reducer";
-import ImageBackgroundSlider from "../../assets/img/no-bgr_logo.png";
 import { BlockUICLIENT } from "../commons/Layouts/Notiflix";
-import Footer from "../footer";
-import "./style.css";
+import Notiflix from "notiflix";
+import CIcon from "@coreui/icons-react";
+import { Tooltip } from "react-bootstrap";
+import { feeLookup } from "src/api/ApiBill/billAPI";
+import CSBM from "../../../src/assets/data/CS Bảo mật.doc";
 const PackageComponent = (props) => {
   const dispatch = useDispatch();
   const VND = new Intl.NumberFormat("vi-VN", {
@@ -50,21 +56,37 @@ const PackageComponent = (props) => {
     localStorage.getItem("myPackage") &&
     JSON.parse(localStorage.getItem("myPackage"));
 
-  const [dataSearch, setDataSearch] = useState(undefined);
+  const [dataSearch, setDataSearch] = useState("code");
   const [dataLookupPackage, setDataLookupPackage] = useState(undefined);
 
   const handleSearch = async (e) => {
     BlockUICLIENT("#package_checkout");
     e.preventDefault();
+    // const filteredData = listData.filter((item) => {
+    //   if (selectedItem == "Mã định danh") {
+    //     return item.customer_code === dataSearch;
+    //   } else if (selectedItem == "CCCD-CMND") {
+    //     return item.customer_identifier_code === dataSearch;
+    //   } else if (selectedItem == "Số điện thoại") {
+    //     return item.customer_phone === dataSearch;
+    //   }
+    // });
+
+    // if (filteredData.length > 0) {
     const result = await feeLookup({
-      type: selectedItem,
-      keyword: dataSearch,
+      type: "code",
+      keyword: "000018",
     });
+    console.log("dd", result);
+
     if (result === 403) {
       setDataLookupPackage(null);
     } else if (result === 500) {
       setDataLookupPackage(null);
     } else {
+      const customerPackages = listPackage.filter((itm) => {
+        return filteredData[0].package_code.includes(itm.package_code);
+      });
       setTimeout(() => {
         Notiflix.Block.remove("#package_checkout");
       }, 1000);
@@ -73,8 +95,12 @@ const PackageComponent = (props) => {
         customer: result.info,
       });
     }
+    // } else {
+    //   setDataLookupPackage(null);
+    // }
     Notiflix.Block.remove("#package_checkout");
   };
+  console.log("test", selectedItem);
   // Check
 
   const [isCheckedAll, setIsCheckedAll] = useState(false);
@@ -83,6 +109,7 @@ const PackageComponent = (props) => {
   const [isIndeterminate, setIsIndeterminate] = useState(false);
   const handleCheckItem = (event, item) => {
     const isChecked = event.target.checked;
+
     // Cập nhật trạng thái checkbox của item được chọn/bỏ chọn
     setCheckedItems((prevCheckedItems) => {
       if (isChecked) {
@@ -100,21 +127,19 @@ const PackageComponent = (props) => {
           setIsCheckedAll(false);
         }
         return prevCheckedItems.filter(
-          (checkedItem) =>
-            // console.log("os", checkedItem)
-            checkedItem !== item
+          (checkedItem) => checkedItem.id !== item.id
         );
       }
     });
 
     // Tính toán tổng số tiền
-    const amount = isChecked ? item.amount : -item.amount;
+    const amount = isChecked ? item.package_price : -item.package_price;
     setTotalAmount((prevTotalAmount) => prevTotalAmount + amount);
   };
   const handleCheckAll = (event) => {
     const isChecked = event.target.checked;
     setIsCheckedAll(isChecked);
-    console.log("jl", dataLookupPackage);
+
     // Cập nhật trạng thái checkbox của tất cả các item
     if (isChecked) {
       setCheckedItems(dataLookupPackage.package);
@@ -132,7 +157,7 @@ const PackageComponent = (props) => {
     setIsIndeterminate(false);
   };
   const calculateTotalAmount = (items) => {
-    return items.reduce((total, item) => total + item.amount, 0);
+    return items.reduce((total, item) => total + item.package_price, 0);
   };
 
   // Checkout
@@ -260,10 +285,7 @@ const PackageComponent = (props) => {
                       style={{ width: "15%" }}
                       className="dropdown-custom input-lookup"
                     >
-                      {(selectedItem === "code" && "Mã định danh") ||
-                        (selectedItem === "identity" && "CMND/CCCD") ||
-                        (selectedItem === "phone" && "Số điện thoại") ||
-                        "Mã định danh"}
+                      {selectedItem || "Mã định danh"}
                     </CDropdownToggle>
                     <CDropdownMenu>
                       <CDropdownItem onClick={() => handleItemClick("code")}>
@@ -327,39 +349,35 @@ const PackageComponent = (props) => {
                           </li>
                         </ul>
                         <div className="d-flex justify-content-between">
-                          {dataLookupPackage.customer.cust_phone !==
-                            undefined && (
+                          {selectedItem == "phone" && (
                             <ul>
                               <li style={{ fontWeight: 700 }}>
                                 <i className="bx bx-phone-call"></i>
                               </li>
                               <li style={{ fontWeight: 500 }}>
                                 Số điện thoại:{" "}
-                                {dataLookupPackage.customer.cust_phone}
+                                {dataLookupPackage.customer.cust_code}
                               </li>
                             </ul>
                           )}
-                          {dataLookupPackage.customer.cust_identity !==
-                            undefined && (
+                          {selectedItem == "identity" && (
                             <ul>
                               <li style={{ fontWeight: 700 }}>
                                 <i className="bx bx-id-card"></i>
                               </li>
                               <li style={{ fontWeight: 500 }}>
                                 CMND/CCCD:
-                                {dataLookupPackage.customer.cust_identity}
+                                {dataLookupPackage.customer.cust_code}
                               </li>
                             </ul>
                           )}
-                          {dataLookupPackage.customer.cust_code !==
-                            undefined && (
+                          {selectedItem == "code" && (
                             <ul>
                               <li style={{ fontWeight: 700 }}>
                                 <i className="bx bx-user"></i>
                               </li>
                               <li style={{ fontWeight: 500 }}>
-                                Mã định danh:{" "}
-                                {dataLookupPackage.customer.cust_code}
+                                Mã định danh: {dataLookupPackage.customer.id}
                               </li>
                             </ul>
                           )}
@@ -438,12 +456,7 @@ const PackageComponent = (props) => {
                             <ul>
                               <li style={{ fontWeight: 700 }}>Kỳ cước :</li>
                               <li style={{ fontWeight: 500 }}>
-                                Tháng
-                                {" " +
-                                  item.bill_period.slice(4) +
-                                  "-" +
-                                  item.bill_period.slice(0, 4)}
-                                {/* {item.bill_period} */}
+                                {item.description_vn}
                               </li>
                             </ul>
                             {/* {dataLookupPackage.customer[0].status === 0 ? ( */}
@@ -466,9 +479,7 @@ const PackageComponent = (props) => {
                               value=""
                               id="flexCheckDefault"
                               checked={checkedItems.includes(item)}
-                              onChange={(event) =>
-                                handleCheckItem(event, item, index)
-                              }
+                              onChange={(event) => handleCheckItem(event, item)}
                             />
                           </div>
                         </div>
@@ -513,9 +524,9 @@ const PackageComponent = (props) => {
         )}
         {dataLookupPackage === null && (
           <div className="container">
-            <h5 className="text-center text-primary">
-              Chưa có ghi nhận kỳ cước trong thời điểm hiện tại
-            </h5>
+            <h4 className="text-center text-primary">
+              Không tìm thấy khách hàng
+            </h4>
           </div>
         )}
       </section>
@@ -642,7 +653,188 @@ const PackageComponent = (props) => {
         </div>
       </section>
 
-      <Footer />
+      <footer className="footer-area pt-100 pb-70" id="footer">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3 col-sm-6">
+              <div className="footer-widget">
+                <div className="footer-logo">
+                  <a href="index.html">
+                    <img
+                      src={ImageBackgroundLogo}
+                      alt="logo"
+                      width="80px"
+                      height="80px"
+                    />
+                  </a>
+                </div>
+                <p>
+                  Là công ty hàng đầu trong lĩnh vực công nghệ, ứng dụng vào
+                  công việc và cuộc sống, góp phần đổi mới sáng tạo, chuyển đổi
+                  số, ứng dụng công nghệ 4.0 và AI vào việc giám sát, quản lý và
+                  điều hành doanh nghiệp.
+                </p>
+                <div className="footer-social">
+                  <a
+                    href="https://www.facebook.com/QiTechnologies"
+                    target="_blank"
+                  ></a>
+                  <a
+                    href="https://www.linkedin.com/company/qi-technologies-corporation"
+                    target="_blank"
+                  >
+                    <i className="bx bxl-linkedin-square"></i>
+                  </a>
+                  <a
+                    href="https://www.youtube.com/channel/UCKXpvNwUuxxmpWOqUBkodcQ"
+                    target="_blank"
+                  >
+                    <i className="bx bxl-youtube text-danger"></i>
+                  </a>
+                  <a
+                    href="https://www.facebook.com/QiTechnologies"
+                    target="_blank"
+                  >
+                    <i className="bx bxl-facebook-circle"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-sm-6">
+              <div className="footer-widget pl-60">
+                <h3>Tài liệu kham khảo</h3>
+                <ul>
+                  <li>
+                    <a href="https://qi.com.vn/docs/DIEU-KHOAN-CHUNG-HOP-DONG-CUNG-CAP-VA-SU-DUNG-DICH-VU-QI.docx">
+                      <i className="bx bx-chevrons-right bx-tada"></i>
+                      Điều khoản chung
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://qi.com.vn/docs/MAU-HOP-DONG-INTERNET-QINET.docx">
+                      <i className="bx bx-chevrons-right bx-tada"></i>
+                      Hợp đồng cung cấp dịch vụ
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://qi.com.vn/docs/Q%C4%90-28-TB-cuoc-2022.pdf">
+                      <i className="bx bx-chevrons-right bx-tada"></i>
+                      Bảng cước dịch vụ QiNET
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-lg-3 col-sm-6">
+              <div className="footer-widget pl-60">
+                <h3>Công Ty</h3>
+                <ul>
+                  <li>
+                    <a href="https://qi.com.vn/about-us">
+                      <i className="bx bx-chevrons-right bx-tada"></i>
+                      Về chúng tôi
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://qi.com.vn/career">
+                      <i className="bx bx-chevrons-right bx-tada"></i>
+                      Tuyển dụng
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://qi.com.vn/contact">
+                      <i className="bx bx-chevrons-right bx-tada"></i>
+                      Liên hệ
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://qi.com.vn/customer-partner">
+                      <i className="bx bx-chevrons-right bx-tada"></i>
+                      Khách hàng - Đối tác
+                    </a>
+                  </li>
+                  <li>
+                    <a href="../../../src/assets/data/CS Bảo mật.doc" download>
+                      <i className="bx bx-chevrons-right bx-tada"></i>
+                      Chính sách bảo mật
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://qi.com.vn/customer-partner">
+                      <i className="bx bx-chevrons-right bx-tada"></i>
+                      Chính sách thanh toán
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://qi.com.vn/customer-partner">
+                      <i className="bx bx-chevrons-right bx-tada"></i>
+                      Chính sách sử dụng dịch vụ
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="col-lg-3 col-sm-6">
+              <div className="footer-widget footer-info">
+                <h3>Thông Tin Liên Hệ</h3>
+                <ul>
+                  <li>
+                    <span>
+                      <i className="bx bx-buildings"></i>
+                      Công ty:
+                    </span>
+                    <a
+                      href="https://qi.com.vn"
+                      style={{ textDecoration: "none" }}
+                    >
+                      CÔNG TY CỔ PHẦN CÔNG NGHỆ QI
+                    </a>
+                  </li>
+                  <li>
+                    <span>
+                      <i className="bx bx-world"></i>
+                      Website:
+                    </span>
+                    <a href="https://qi.com.vn"> qi.com.vn </a>
+                  </li>
+
+                  <li>
+                    <span>
+                      <i className="bx bx-code"></i>
+                      Mã số thuế:
+                    </span>
+                    <a href="#"> 0305350288 cấp 30 tháng 11 năm 2007 </a>
+                  </li>
+                  <li>
+                    <span>
+                      <i className="bx bxs-phone"></i>
+                      Số điện thoại:
+                    </span>
+                    <a href="tel:0917888749"> 0917888749</a>
+                  </li>
+                  <li>
+                    <span>
+                      <i className="bx bxs-envelope"></i>
+                      Email:
+                    </span>
+                    <a href="#"> csc@qi.com.vn </a>
+                  </li>
+
+                  <li>
+                    <span>
+                      <i className="bx bx-location-plus"></i>
+                      Địa chỉ:
+                    </span>
+                    Qi Technologies Corporation, Lô U14b - 16a, Đường số 22, KCX
+                    Tân Thuận, P. Tân Thuận Đông, Quận 7, Tp. Hồ Chí Minh
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
       <div className="copyright-text text-center">
         <p>
           © 2023 - All rights reserved
