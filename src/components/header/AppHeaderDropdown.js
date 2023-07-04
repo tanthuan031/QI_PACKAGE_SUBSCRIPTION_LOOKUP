@@ -73,7 +73,16 @@ const AppHeaderDropdown = () => {
             <CDropdownItem href="/">Trang chủ</CDropdownItem>
             <CDropdownItem href="#footer">Về chúng tôi</CDropdownItem>
             <CDropdownItem href="#contact">Liên hệ</CDropdownItem>
-
+            <CDropdown variant="nav-item-1">
+              <CDropdownToggle color="secondary">Chính sách</CDropdownToggle>
+              <CDropdownMenu>
+                <CDropdownItem href="#">Chính sách bảo mật</CDropdownItem>
+                <CDropdownItem href="#">Chính sách thanh toán</CDropdownItem>
+                <CDropdownItem href="#">
+                  Chính sách sử dụng dịch vụ
+                </CDropdownItem>
+              </CDropdownMenu>
+            </CDropdown>
             {/* <CDropdownItem href="#">
              
               <CNavLink

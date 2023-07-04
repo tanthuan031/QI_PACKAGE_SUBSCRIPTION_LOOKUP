@@ -28,6 +28,7 @@ axiosAPI.interceptors.response.use(
     switch (error.response) {
       case 500:
         console.log("Server error");
+        return error.response;
         break;
       default:
         console.log("Something went wrong");

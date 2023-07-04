@@ -7,6 +7,9 @@ import "./style.css";
 import { setIsCreatePayment } from "src/redux/reducer/payment/payment.reducer";
 import iconVNPAY from "../../utils/logo-vnpay.png";
 import Footer from "../footer";
+import { vnpayPaymentPackage } from "src/api/ApiBill/billAPI";
+import { ErrorToast } from "../commons/Layouts/Alerts";
+import { BlockUIAPI } from "../commons/Layouts/Notiflix";
 
 const PaymentComponent = (props) => {
   const dispatch = useDispatch();
@@ -128,10 +131,24 @@ const PaymentComponent = (props) => {
 
   const dataCheckout = useSelector(dataPackagePaymentSelector);
   const [show, setShow] = useState(false);
-
+  console.log("dataCheckout", dataCheckout);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  console.log("dj", dataCheckout.customers.cust_code);
+  const handlePayment = async () => {
+    //  BlockUICLIENT("#rô");
+    const data = {
+      bill_id: dataCheckout.customers.id,
+      order_info: "Thanh toán cước",
+      total: dataCheckout.totalPrice,
+      details: dataCheckout.packages,
+    };
+    const result = await vnpayPaymentPackage(data);
+    if (result === 500) {
+      ErrorToast("Có lỗi xảy ra. Vui lòng thử lại ", 3000);
+    } else {
+      window.location.href = result;
+    }
+  };
+
   return (
     <>
       <div className="container mt-5 ">
@@ -204,7 +221,7 @@ const PaymentComponent = (props) => {
                 {dataCheckout !== undefined &&
                   dataCheckout.packages.map((item, index) => {
                     return (
-                      <div className="col-lg-12">
+                      <div className="col-lg-12" key={index}>
                         <div className="job-card-two package-item">
                           <div className="row align-items-center">
                             <div className="col-md-12">
@@ -358,7 +375,7 @@ const PaymentComponent = (props) => {
                   </button>
                   <button
                     className="btn btn-primary mt-3 "
-                    onClick={handleShow}
+                    onClick={handlePayment}
                   >
                     Thanh toán
                   </button>

@@ -1,40 +1,3 @@
-import React from "react";
-import {
-  CAvatar,
-  CBadge,
-  CDropdown,
-  CDropdownDivider,
-  CDropdownHeader,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CHeaderNav,
-  CNavItem,
-  CNavLink,
-} from "@coreui/react";
-import {
-  cilBell,
-  cilCreditCard,
-  cilCommentSquare,
-  cilEnvelopeOpen,
-  cilFile,
-  cilLockLocked,
-  cilSettings,
-  cilTask,
-  cilUser,
-  cilList,
-} from "@coreui/icons";
-import CIcon from "@coreui/icons-react";
-
-import avatar8 from "./../../assets/images/avatars/8.jpg";
-import { NavLink } from "react-router-dom";
-import { Badge } from "react-bootstrap";
-import { FaShoppingCart } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { countCartItemSelector } from "src/redux/selectors/product/product.selector";
-import ImageBackgroundSlider from "../../assets/img/no-bgr_logo.png";
-import ImageBackgroundCustomer from "../../assets/img/tag.png";
-import ImageBackgroundCompany from "../../assets/img/company-logo/5.png";
 import ImageBackgroundLogo from "../../assets/img/logo_qi.png";
 const Footer = () => {
   const chinhsachbaomat = process.env.PUBLIC_URL + "/data/CS Bảo mật.doc";
@@ -49,7 +12,7 @@ const Footer = () => {
             <div className="col-lg-3 col-sm-6">
               <div className="footer-widget">
                 <div className="footer-logo">
-                  <a href="index.html">
+                  <a href="/">
                     <img
                       src={ImageBackgroundLogo}
                       alt="logo"
@@ -194,7 +157,9 @@ const Footer = () => {
                       <i className="bx bx-code"></i>
                       Mã số thuế:
                     </span>
-                    <a href="#"> 0305350288 cấp 30 tháng 11 năm 2007 </a>
+                    <a href="tel:0305350288">
+                      0305350288 cấp 30 tháng 11 năm 2007
+                    </a>
                   </li>
                   <li>
                     <span>
@@ -208,7 +173,7 @@ const Footer = () => {
                       <i className="bx bxs-envelope"></i>
                       Email:
                     </span>
-                    <a href="#"> csc@qi.com.vn </a>
+                    <a href="mailto:csc@qi.com.vn"> csc@qi.com.vn </a>
                   </li>
 
                   <li>

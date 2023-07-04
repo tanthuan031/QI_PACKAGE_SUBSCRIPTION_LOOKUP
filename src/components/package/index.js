@@ -18,7 +18,7 @@ import {
   setIsCreatePayment,
 } from "src/redux/reducer/payment/payment.reducer";
 import ImageBackgroundSlider from "../../assets/img/no-bgr_logo.png";
-import { BlockUICLIENT } from "../commons/Layouts/Notiflix";
+import { BlockUIAPI, BlockUICLIENT } from "../commons/Layouts/Notiflix";
 import Footer from "../footer";
 import "./style.css";
 const PackageComponent = (props) => {
@@ -54,7 +54,7 @@ const PackageComponent = (props) => {
   const [dataLookupPackage, setDataLookupPackage] = useState(undefined);
 
   const handleSearch = async (e) => {
-    BlockUICLIENT("#package_checkout");
+    BlockUIAPI("#package_checkout");
     e.preventDefault();
     const result = await feeLookup({
       type: selectedItem,
@@ -114,7 +114,6 @@ const PackageComponent = (props) => {
   const handleCheckAll = (event) => {
     const isChecked = event.target.checked;
     setIsCheckedAll(isChecked);
-    console.log("jl", dataLookupPackage);
     // Cập nhật trạng thái checkbox của tất cả các item
     if (isChecked) {
       setCheckedItems(dataLookupPackage.package);
@@ -402,92 +401,92 @@ const PackageComponent = (props) => {
                   </label>
                 </div>
               </div>
-
-              {dataLookupPackage.package.map((item, index) => {
-                return (
-                  <div className="col-lg-12" key={index}>
-                    <div className="job-card-two package-item">
-                      <div className="row align-items-center">
-                        {/* <div className="col-md-1">
+              <div style={{ maxHeight: "950px", overflowY: "scroll" }}>
+                {dataLookupPackage.package.map((item, index) => {
+                  return (
+                    <div className="col-lg-12" key={index}>
+                      <div className="job-card-two package-item">
+                        <div className="row align-items-center">
+                          {/* <div className="col-md-1">
                           <div className="company-logo">
                             <a href="job-details.html">
                               <img src={ImageBackgroundCompany} alt="logo" />
                             </a>
                           </div>
                         </div> */}
-                        <div className="col-md-11">
-                          <div className="job-info">
-                            <div className="form-check">
-                              <input
-                                className="form-check-input "
-                                type="radio"
-                                name={`flexRadioDefault${index}`}
-                                id={`flexRadioDefault${index}`}
-                                defaultChecked
-                              />
-                              <label
-                                className="form-check-label "
-                                htmlFor={`flexRadioDefault${index}`}
-                              >
-                                <h5>
-                                  #{item.pay_category} - {item.description_vn}
-                                </h5>
-                              </label>
-                            </div>
+                          <div className="col-md-11">
+                            <div className="job-info">
+                              <div className="form-check">
+                                <input
+                                  className="form-check-input "
+                                  type="radio"
+                                  name={`flexRadioDefault${index}`}
+                                  id={`flexRadioDefault${index}`}
+                                  defaultChecked
+                                />
+                                <label
+                                  className="form-check-label "
+                                  htmlFor={`flexRadioDefault${index}`}
+                                >
+                                  <h5>
+                                    #{item.pay_category} - {item.description_vn}
+                                  </h5>
+                                </label>
+                              </div>
 
-                            <ul>
-                              <li style={{ fontWeight: 700 }}>Kỳ cước :</li>
-                              <li style={{ fontWeight: 500 }}>
-                                Tháng
-                                {" " +
-                                  item.bill_period.slice(4) +
-                                  "-" +
-                                  item.bill_period.slice(0, 4)}
-                                {/* {item.bill_period} */}
-                              </li>
-                            </ul>
-                            {/* {dataLookupPackage.customer[0].status === 0 ? ( */}
-                            <span className="btn btn-outline-warning btn-cus">
-                              Chưa thanh toán
-                            </span>
-                            {/* ) : ( */}
-                            {/* <span className="btn btn-outline-warning">
+                              <ul>
+                                <li style={{ fontWeight: 700 }}>Kỳ cước :</li>
+                                <li style={{ fontWeight: 500 }}>
+                                  Tháng
+                                  {" " +
+                                    item.bill_period.slice(4) +
+                                    "-" +
+                                    item.bill_period.slice(0, 4)}
+                                </li>
+                              </ul>
+                              {/* {dataLookupPackage.customer[0].status === 0 ? ( */}
+                              <span className="btn btn-outline-warning btn-cus">
+                                Chưa thanh toán
+                              </span>
+                              {/* ) : ( */}
+                              {/* <span className="btn btn-outline-warning">
                                 Quá hạn thanh toán
                               </span>
                             )} */}
+                            </div>
+                          </div>
+                          <div className="col-md-1">
+                            <div className="form-check text-center">
+                              <input
+                                className="form-check-input item-checkbox-payment"
+                                style={{ margin: "0 50%" }}
+                                type="checkbox"
+                                value=""
+                                id="flexCheckDefault"
+                                checked={checkedItems.includes(item)}
+                                onChange={(event) =>
+                                  handleCheckItem(event, item, index)
+                                }
+                              />
+                            </div>
                           </div>
                         </div>
-                        <div className="col-md-1">
-                          <div className="form-check text-center">
-                            <input
-                              className="form-check-input item-checkbox-payment"
-                              style={{ margin: "0 50%" }}
-                              type="checkbox"
-                              value=""
-                              id="flexCheckDefault"
-                              checked={checkedItems.includes(item)}
-                              onChange={(event) =>
-                                handleCheckItem(event, item, index)
-                              }
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div
-                          className="d-flex justify-content-end"
-                          style={{ position: "relative" }}
-                        >
-                          <div className="d-flex job-card-two-currency">
-                            <h6>Số tiền :</h6>
-                            <h6>{VND.format(item.amount)}</h6>
+                        <div className="row">
+                          <div
+                            className="d-flex justify-content-end"
+                            style={{ position: "relative" }}
+                          >
+                            <div className="d-flex job-card-two-currency">
+                              <h6>Số tiền :</h6>
+                              <h6>{VND.format(item.amount)}</h6>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
             <div className="col-lg-12 mr-3">
               <div className="form-check text-end">
