@@ -157,8 +157,8 @@ const Footer = () => {
                       <i className="bx bx-code"></i>
                       Mã số thuế:
                     </span>
-                    <a href="tel:0305350288">
-                      0305350288 cấp 30 tháng 11 năm 2007
+                    <a href="tel:0305350288" style={{ textDecoration: "none" }}>
+                      0305350288 ( 30/11/2007 )
                     </a>
                   </li>
                   <li>
