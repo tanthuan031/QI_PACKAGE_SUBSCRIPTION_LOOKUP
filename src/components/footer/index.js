@@ -1,9 +1,9 @@
 import ImageBackgroundLogo from "../../assets/img/logo_qi.png";
 const Footer = () => {
-  const chinhsachbaomat = process.env.PUBLIC_URL + "/data/CS Bảo mật.doc";
+  const chinhsachbaomat = process.env.PUBLIC_URL + "/data/cs-bao-mat.doc";
   const chinhsachthanhtoan =
-    process.env.PUBLIC_URL + "/data/CS thanh toán.docx";
-  const chinhsachdichvu = process.env.PUBLIC_URL + "/data/CS Sd dịch vụ.docx";
+    process.env.PUBLIC_URL + "/data/cs-thanh-toan.docx";
+  const chinhsachdichvu = process.env.PUBLIC_URL + "/data/cs-dich-vu.docx";
   return (
     <>
       <footer className="footer-area pt-100 pb-70 mt-5" id="footer">
