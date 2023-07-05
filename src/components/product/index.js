@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCountCartItem } from "src/redux/reducer/product/product.reducer";
 import { countCartItemSelector } from "src/redux/selectors/product/product.selector";
 import Footer from "../footer";
+import { Button } from "react-bootstrap";
 const ProductComponent = (props) => {
   const VND = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -105,12 +106,12 @@ const ProductComponent = (props) => {
                         </div>
                       </div>
                       <div className="card-product-footer text-center mt-5">
-                        <CButton
+                        <Button
                           onClick={() => handleAddCart(item)}
                           disabled={isItemInCart(item)}
                         >
                           Thêm giỏ hàng
-                        </CButton>
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -132,7 +133,7 @@ const ProductComponent = (props) => {
             <div className="row">
               {dataSpeed.map((item, index) => {
                 return (
-                  <div className="col-xl-3 col-sm-6 col-12 mt-3">
+                  <div className="col-xl-3 col-sm-6 col-12 mt-3" key={index}>
                     <div className="card-product">
                       <div className="card-product-header">
                         <h4 className="text-center">{item.name_package}</h4>
@@ -153,12 +154,12 @@ const ProductComponent = (props) => {
                         </div>
                       </div>
                       <div className="card-product-footer text-center mt-5">
-                        <CButton
+                        <Button
                           onClick={() => handleAddCart(item)}
                           disabled={isItemInCart(item)}
                         >
                           Thêm giỏ hàng
-                        </CButton>
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -201,12 +202,12 @@ const ProductComponent = (props) => {
                         </div>
                       </div>
                       <div className="card-product-footer text-center mt-5">
-                        <CButton
+                        <Button
                           onClick={() => handleAddCart(item)}
                           disabled={isItemInCart(item)}
                         >
                           Thêm giỏ hàng
-                        </CButton>
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -228,7 +229,7 @@ const ProductComponent = (props) => {
             <div className="row">
               {dataSpecial.map((item, index) => {
                 return (
-                  <div className="col-xl-3 col-sm-6 col-12 mt-3">
+                  <div className="col-xl-3 col-sm-6 col-12 mt-3" key={index}>
                     <div className="card-product">
                       <div className="card-product-header">
                         <h4 className="text-center">{item.name_package}</h4>
@@ -249,12 +250,12 @@ const ProductComponent = (props) => {
                         </div>
                       </div>
                       <div className="card-product-footer text-center mt-5">
-                        <CButton
+                        <Button
                           onClick={() => handleAddCart(item)}
                           disabled={isItemInCart(item)}
                         >
                           Thêm giỏ hàng
-                        </CButton>
+                        </Button>
                       </div>
                     </div>
                   </div>

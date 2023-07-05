@@ -191,7 +191,7 @@ const PackageComponent = (props) => {
                     style={{ maxWidth: "100%" }}
                   />
                   <div className="cricle-background_banner" id="find-section">
-                    <CAvatar
+                    {/* <CAvatar
                       src={
                         "https://coreui.io/react/docs/static/1-34eedf58c0876517e8587997f9625944.jpg"
                       }
@@ -209,7 +209,7 @@ const PackageComponent = (props) => {
 
                     <h5 className="customer_star_banner pt-2">
                       <FaStar className="text-warning" /> 1200+ Khách hàng
-                    </h5>
+                    </h5> */}
                   </div>
                 </div>
               </div>
@@ -512,8 +512,16 @@ const PackageComponent = (props) => {
         )}
         {dataLookupPackage === null && (
           <div className="container">
-            <h5 className="text-center text-primary">
-              Chưa có ghi nhận kỳ cước trong thời điểm hiện tại
+            {/* <h1 className="error text-center">404</h1> */}
+            <img
+              src="https://portal.px1.vn/static/images/404error.png"
+              alt="package"
+              style={{ height: "10vh", margin: "0 auto" }}
+              className="d-flex justify-content-center "
+            ></img>
+            <h5 className="text-center text-primary ">
+              Thông tin không tồn tại <br /> Hoặc chưa có ghi nhận kỳ cước trong
+              thời điểm hiện tại
             </h5>
           </div>
         )}

@@ -237,28 +237,35 @@ const CartDetailComponent = (props) => {
                                               item
                                             )
                                           }
+                                          defaultValue={
+                                            item.quantity == 1
+                                              ? 1
+                                              : item.quantity == 6
+                                              ? 6
+                                              : 12
+                                          }
                                         >
                                           <option
                                             value="1"
-                                            selected={
-                                              item.quantity == 1 ? true : false
-                                            }
+                                            // selected={
+                                            //   item.quantity == 1 ? true : false
+                                            // }
                                           >
                                             1
                                           </option>
                                           <option
                                             value="6"
-                                            selected={
-                                              item.quantity == 6 ? true : false
-                                            }
+                                            // selected={
+                                            //   item.quantity == 6 ? true : false
+                                            // }
                                           >
                                             6
                                           </option>
                                           <option
                                             value="12"
-                                            selected={
-                                              item.quantity == 12 ? true : false
-                                            }
+                                            // selected={
+                                            //   item.quantity == 12 ? true : false
+                                            // }
                                           >
                                             12
                                           </option>
@@ -504,7 +511,13 @@ const CartDetailComponent = (props) => {
             </>
           ) : (
             <div style={{ minHeight: "300px" }}>
-              <h5>
+              <img
+                src="https://portal.px1.vn/static/images/404error.png"
+                alt="package"
+                style={{ height: "70vh", margin: "0 auto" }}
+                className="d-flex justify-content-center "
+              ></img>
+              <h5 className="text-center">
                 Giỏ hàng trống{" "}
                 <span>
                   <a href="/product">Thêm gói cước</a>

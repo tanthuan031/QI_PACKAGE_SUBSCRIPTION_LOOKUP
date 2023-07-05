@@ -35,6 +35,10 @@ import { countCartItemSelector } from "src/redux/selectors/product/product.selec
 
 const AppHeaderDropdown = () => {
   const countCart = useSelector(countCartItemSelector);
+  const chinhsachbaomat = process.env.PUBLIC_URL + "/data/cs-bao-mat.html";
+  const chinhsachthanhtoan =
+    process.env.PUBLIC_URL + "/data/cs-thanh-toan.html";
+  const chinhsachdichvu = process.env.PUBLIC_URL + "/data/cs-dich-vu.html";
   return (
     <>
       <div className="d-flex justify-conten-between">
@@ -72,17 +76,16 @@ const AppHeaderDropdown = () => {
             </CDropdownHeader>
             <CDropdownItem href="/">Trang chủ</CDropdownItem>
             <CDropdownItem href="#footer">Về chúng tôi</CDropdownItem>
-            <CDropdownItem href="#contact">Liên hệ</CDropdownItem>
-            <CDropdown variant="nav-item-1">
-              <CDropdownToggle color="secondary">Chính sách</CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem href="#">Chính sách bảo mật</CDropdownItem>
-                <CDropdownItem href="#">Chính sách thanh toán</CDropdownItem>
-                <CDropdownItem href="#">
-                  Chính sách sử dụng dịch vụ
-                </CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
+            <CDropdownItem href="#footer">Liên hệ</CDropdownItem>
+            <CDropdownItem href={chinhsachbaomat} target="_blank">
+              CS bảo mật
+            </CDropdownItem>
+            <CDropdownItem href={chinhsachthanhtoan} target="_blank">
+              CS thanh toán
+            </CDropdownItem>
+            <CDropdownItem href={chinhsachdichvu} target="_blank">
+              CS sử dụng dịch vụ
+            </CDropdownItem>
             {/* <CDropdownItem href="#">
              
               <CNavLink
