@@ -570,7 +570,10 @@ const PackageComponent = (props) => {
               </div>
             </div>
             <div className="col-md-3">
-              <div className="col-md-12" style={{ height: "220px" }}>
+              <div
+                className="col-md-12"
+                style={{ height: "220px", textAlign: "center" }}
+              >
                 <i
                   className="bx bxl-redux"
                   style={{
@@ -588,7 +591,10 @@ const PackageComponent = (props) => {
                   tạo(AI), tối ưu hóa quy trình quản lý doanh nghiệp{" "}
                 </p>
               </div>
-              <div className="col-md-12 " style={{ height: "220px" }}>
+              <div
+                className="col-md-12 "
+                style={{ height: "220px", textAlign: "center" }}
+              >
                 <i
                   className="bx bxl-google"
                   style={{
@@ -608,7 +614,10 @@ const PackageComponent = (props) => {
               </div>
             </div>
             <div className="col-md-3">
-              <div className="col-md-12" style={{ height: "220px" }}>
+              <div
+                className="col-md-12"
+                style={{ height: "220px", textAlign: "center" }}
+              >
                 <i
                   className="bx bx-laptop"
                   style={{
@@ -626,7 +635,10 @@ const PackageComponent = (props) => {
                   tối ưu hệ thống sẵn có cho tổ chức và doanh nghiệp{" "}
                 </p>
               </div>
-              <div className="col-md-12" style={{ height: "220px" }}>
+              <div
+                className="col-md-12"
+                style={{ height: "220px", textAlign: "center" }}
+              >
                 <i
                   className="bx bx-sun"
                   style={{
