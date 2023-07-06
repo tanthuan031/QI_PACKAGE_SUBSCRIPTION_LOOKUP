@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./static/css/main.1ed8810d.css",
-    "main.js": "./static/js/main.7d5b429a.js",
+    "main.js": "./static/js/main.00687280.js",
     "static/js/24.d7ea185e.chunk.js": "./static/js/24.d7ea185e.chunk.js",
     "static/js/9.2b773d0f.chunk.js": "./static/js/9.2b773d0f.chunk.js",
     "static/js/1.4f210dd4.chunk.js": "./static/js/1.4f210dd4.chunk.js",
@@ -10,12 +10,13 @@
     "static/media/2.jpg": "./static/media/2.99c69369ba9bdebaf08f.jpg",
     "static/media/no-bgr_logo.png": "./static/media/no-bgr_logo.77b829f019dd95e8884b.png",
     "static/media/job.png": "./static/media/job.90af90922189d898af85.png",
+    "static/media/404error.png": "./static/media/404error.e574f10e587c809f5962.png",
     "static/media/rectangle.png": "./static/media/rectangle.31f8dfa13674fd2a73ed.png",
     "static/media/Qi_logo1.png": "./static/media/Qi_logo1.7c03ceb45e2bdbaade4a.png",
     "static/media/8.jpg": "./static/media/8.35ee8919ea545620a475.jpg",
     "index.html": "./index.html",
     "main.1ed8810d.css.map": "./static/css/main.1ed8810d.css.map",
-    "main.7d5b429a.js.map": "./static/js/main.7d5b429a.js.map",
+    "main.00687280.js.map": "./static/js/main.00687280.js.map",
     "24.d7ea185e.chunk.js.map": "./static/js/24.d7ea185e.chunk.js.map",
     "9.2b773d0f.chunk.js.map": "./static/js/9.2b773d0f.chunk.js.map",
     "1.4f210dd4.chunk.js.map": "./static/js/1.4f210dd4.chunk.js.map",
@@ -24,6 +25,6 @@
   },
   "entrypoints": [
     "static/css/main.1ed8810d.css",
-    "static/js/main.7d5b429a.js"
+    "static/js/main.00687280.js"
   ]
 }

@@ -106,7 +106,7 @@ const Footer = () => {
                       Khách hàng - Đối tác
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href={chinhsachbaomat} download>
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Chính sách bảo mật
@@ -123,7 +123,7 @@ const Footer = () => {
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Chính sách sử dụng dịch vụ
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
@@ -159,6 +159,10 @@ const Footer = () => {
                     </span>
                     <a href="tel:0305350288" style={{ textDecoration: "none" }}>
                       0305350288 ( 30/11/2007 )
+                      <br />
+                      <span style={{ paddingLeft: "25px" }}>
+                        cấp tại Sở Kế hoạch và Đầu tư TPHCM
+                      </span>
                     </a>
                   </li>
                   <li>
@@ -166,7 +170,7 @@ const Footer = () => {
                       <i className="bx bxs-phone"></i>
                       Số điện thoại:
                     </span>
-                    <a href="tel:0917888749"> 0917888749</a>
+                    <a href="tel:0917888749"> 1900633827- 0917888749</a>
                   </li>
                   <li>
                     <span>

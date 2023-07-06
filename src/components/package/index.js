@@ -20,6 +20,7 @@ import {
 import ImageBackgroundSlider from "../../assets/img/no-bgr_logo.png";
 import { BlockUIAPI, BlockUICLIENT } from "../commons/Layouts/Notiflix";
 import Footer from "../footer";
+import IMG404 from "../../assets/img/404error.png";
 import "./style.css";
 const PackageComponent = (props) => {
   const dispatch = useDispatch();
@@ -52,14 +53,17 @@ const PackageComponent = (props) => {
 
   const [dataSearch, setDataSearch] = useState(undefined);
   const [dataLookupPackage, setDataLookupPackage] = useState(undefined);
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = async (e) => {
     BlockUIAPI("#package_checkout");
+    setLoading(true);
     e.preventDefault();
     const result = await feeLookup({
       type: selectedItem,
       keyword: dataSearch,
     });
+    setLoading(false);
     if (result === 403) {
       setDataLookupPackage(null);
     } else if (result === 500) {
@@ -513,16 +517,23 @@ const PackageComponent = (props) => {
         {dataLookupPackage === null && (
           <div className="container">
             {/* <h1 className="error text-center">404</h1> */}
-            <img
-              src="https://portal.px1.vn/static/images/404error.png"
-              alt="package"
-              style={{ height: "10vh", margin: "0 auto" }}
-              className="d-flex justify-content-center "
-            ></img>
-            <h5 className="text-center text-primary ">
-              Thông tin không tồn tại <br /> Hoặc chưa có ghi nhận kỳ cước trong
-              thời điểm hiện tại
-            </h5>
+
+            <>
+              <img
+                src={loading === false ? IMG404 : undefined}
+                style={{ height: "10vh", margin: "0 auto" }}
+                className="d-flex justify-content-center "
+              ></img>
+
+              <h5 className="text-center text-primary ">
+                {loading === false && (
+                  <>
+                    Thông tin không tồn tại <br /> Hoặc chưa có ghi nhận kỳ cước
+                    trong thời điểm hiện tại
+                  </>
+                )}
+              </h5>
+            </>
           </div>
         )}
       </section>
