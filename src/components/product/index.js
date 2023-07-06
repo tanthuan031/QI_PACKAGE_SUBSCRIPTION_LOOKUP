@@ -195,10 +195,11 @@ const ProductComponent = (props) => {
                         <div className="card-product-body-item mt-3 text-center">
                           <p>Tốc độ: {item.speed}Mbps</p>
                           <p>
-                            Cổng ra quốc tế: {item.international_gateway}Kb/s
+                            Cổng ra quốc tế: {item.international_gateway}
+                            Mbps/1Mbps
                           </p>
-                          <p>1 Thiết bị Mesh: {item.mesh}đ</p>
-                          <p>2 Thiết bị Mesh: {item.mesh_1}đ</p>
+                          {/* <p>1 Thiết bị Mesh: {item.mesh}đ</p>
+                          <p>2 Thiết bị Mesh: {item.mesh_1}đ</p> */}
                         </div>
                       </div>
                       <div className="card-product-footer text-center mt-5">
@@ -243,10 +244,10 @@ const ProductComponent = (props) => {
                         <div className="card-product-body-item mt-3 text-center">
                           <p>Tốc độ: {item.speed}Mbps</p>
                           <p>
-                            Cổng ra quốc tế: {item.international_gateway}Kb/s
+                            Cổng ra quốc tế: {item.international_gateway}Mb/s
                           </p>
-                          <p>1 Thiết bị Mesh: {item.mesh}đ</p>
-                          <p>2 Thiết bị Mesh: {item.mesh_1}đ</p>
+                          {/* <p>1 Thiết bị Mesh: {item.mesh}đ</p>
+                          <p>2 Thiết bị Mesh: {item.mesh_1}đ</p> */}
                         </div>
                       </div>
                       <div className="card-product-footer text-center mt-5">
