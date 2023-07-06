@@ -4,6 +4,12 @@ const Footer = () => {
   const chinhsachthanhtoan =
     process.env.PUBLIC_URL + "/data/cs-thanh-toan.docx";
   const chinhsachdichvu = process.env.PUBLIC_URL + "/data/cs-dich-vu.docx";
+
+  const DK_CHUNG =
+    process.env.PUBLIC_URL +
+    "/data/DIEU-KHOAN-CHUNG-HOP-DONG-CUNG-CAP-VA-SU-DUNG-DICH-VU-QI.html";
+  const MAU_HD =
+    process.env.PUBLIC_URL + "/data/MAU-HOP-DONG-INTERNET-QINET-NEW.html";
   return (
     <>
       <footer className="footer-area pt-100 pb-70 mt-5" id="footer">
@@ -58,19 +64,25 @@ const Footer = () => {
                 <h3>Tài liệu kham khảo</h3>
                 <ul>
                   <li>
-                    <a href="https://qi.com.vn/docs/DIEU-KHOAN-CHUNG-HOP-DONG-CUNG-CAP-VA-SU-DUNG-DICH-VU-QI.docx">
+                    <a href={DK_CHUNG} target="_blank">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Điều khoản chung
                     </a>
                   </li>
                   <li>
-                    <a href="https://qi.com.vn/docs/MAU-HOP-DONG-INTERNET-QINET.docx">
+                    <a
+                      href="https://qi.com.vn/docs/MAU-HOP-DONG-INTERNET-QINET-NEW.docx"
+                      target="_blank"
+                    >
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Hợp đồng cung cấp dịch vụ
                     </a>
                   </li>
                   <li>
-                    <a href="https://qi.com.vn/docs/Q%C4%90-28-TB-cuoc-2022.pdf">
+                    <a
+                      href="https://qi.com.vn/docs/Q%C4%90-30-Bo-sung-bang-gia-cuoc-dich-vu.pdf"
+                      target="_blank"
+                    >
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Bảng cước dịch vụ QiNET
                     </a>
