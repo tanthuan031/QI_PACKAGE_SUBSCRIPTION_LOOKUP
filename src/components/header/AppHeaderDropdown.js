@@ -35,10 +35,9 @@ import { countCartItemSelector } from "src/redux/selectors/product/product.selec
 
 const AppHeaderDropdown = () => {
   const countCart = useSelector(countCartItemSelector);
-  const chinhsachbaomat = process.env.PUBLIC_URL + "/data/cs-bao-mat.html";
-  const chinhsachthanhtoan =
-    process.env.PUBLIC_URL + "/data/cs-thanh-toan.html";
-  const chinhsachdichvu = process.env.PUBLIC_URL + "/data/cs-dich-vu.html";
+  const chinhsachbaomat = process.env.PUBLIC_URL + "/data/cs-bao-mat.pdf";
+  const chinhsachthanhtoan = process.env.PUBLIC_URL + "/data/cs-thanh-toan.pdf";
+  const chinhsachdichvu = process.env.PUBLIC_URL + "/data/cs-dich-vu.pdf";
   return (
     <>
       <div className="d-flex justify-conten-between">

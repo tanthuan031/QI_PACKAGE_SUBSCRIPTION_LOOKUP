@@ -7,9 +7,9 @@ const Footer = () => {
 
   const DK_CHUNG =
     process.env.PUBLIC_URL +
-    "/data/DIEU-KHOAN-CHUNG-HOP-DONG-CUNG-CAP-VA-SU-DUNG-DICH-VU-QI.html";
+    "/data/DIEU-KHOAN-CHUNG-HOP-DONG-CUNG-CAP-VA-SU-DUNG-DICH-VU-QI.pdf";
   const MAU_HD =
-    process.env.PUBLIC_URL + "/data/MAU-HOP-DONG-INTERNET-QINET-NEW.html";
+    process.env.PUBLIC_URL + "/data/MAU-HOP-DONG-INTERNET-QINET-NEW.pdf";
   return (
     <>
       <footer className="footer-area pt-100 pb-70 mt-5" id="footer">

@@ -74,10 +74,9 @@ const AppHeader = () => {
     setIsPolicyOpen(!isPolicyOpen);
   };
 
-  const chinhsachbaomat = process.env.PUBLIC_URL + "/data/cs-bao-mat.html";
-  const chinhsachthanhtoan =
-    process.env.PUBLIC_URL + "/data/cs-thanh-toan.html";
-  const chinhsachdichvu = process.env.PUBLIC_URL + "/data/cs-dich-vu.html";
+  const chinhsachbaomat = process.env.PUBLIC_URL + "/data/cs-bao-mat.pdf";
+  const chinhsachthanhtoan = process.env.PUBLIC_URL + "/data/cs-thanh-toan.pdf";
+  const chinhsachdichvu = process.env.PUBLIC_URL + "/data/cs-dich-vu.pdf";
 
   return (
     <>
