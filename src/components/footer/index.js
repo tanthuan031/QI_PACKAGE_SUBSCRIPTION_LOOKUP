@@ -70,10 +70,7 @@ const Footer = () => {
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://qi.com.vn/docs/MAU-HOP-DONG-INTERNET-QINET-NEW.docx"
-                      target="_blank"
-                    >
+                    <a href={MAU_HD} target="_blank">
                       <i className="bx bx-chevrons-right bx-tada"></i>
                       Hợp đồng cung cấp dịch vụ
                     </a>
